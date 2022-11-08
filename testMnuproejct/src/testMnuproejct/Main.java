@@ -10,6 +10,7 @@ public class Main {
 =======
 		System.out.println("203620 신도훈");
 		System.out.println("193909 박준범");
+		System.out.println("193620 손정현");
 >>>>>>> refs/remotes/origin/main
 	}
 
