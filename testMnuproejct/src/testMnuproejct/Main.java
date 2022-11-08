@@ -13,7 +13,7 @@ public class Main {
 		System.out.println("193620 손정현");
 		System.out.println("193620 손정현 테스트중입니다.");
 		System.out.println("오후 12:17");
-		
+		System.out.println("오후 12:28");
 		
 >>>>>>> refs/remotes/origin/main
 	}
