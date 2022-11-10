@@ -15,6 +15,7 @@ public class Main {
 		System.out.println("오후 12:17");
 		System.out.println("오후 12:28");
 		System.out.println("오후 07:45");
+		System.out.println("오전 10:55");
 		
 >>>>>>> refs/remotes/origin/main
 	}
