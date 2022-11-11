@@ -9,7 +9,6 @@ public class Main {
 		System.out.println("한글아 깨지지마");
 		System.out.println("203620 신동훈 2022.11.11");
 		System.out.println("한글 hangul");
-		System.out.println("1");
 	}
 
 }
