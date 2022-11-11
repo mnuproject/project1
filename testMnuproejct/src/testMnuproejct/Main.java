@@ -8,14 +8,15 @@ public class Main {
 		System.out.println("203632 - tae min");
 		
 =======
-		System.out.println("203620 ½ÅµµÈÆ");
-		System.out.println("193909 ¹ÚÁØ¹ü");
-		System.out.println("193620 ¼ÕÁ¤Çö");
-		System.out.println("193620 ¼ÕÁ¤Çö Å×½ºÆ®ÁßÀÔ´Ï´Ù.");
-		System.out.println("¿ÀÈÄ 12:17");
-		System.out.println("¿ÀÈÄ 12:28");
-		System.out.println("¿ÀÈÄ 07:45");
-		System.out.println("¿ÀÀü 10:55");
+		System.out.println("203620 ï¿½Åµï¿½ï¿½ï¿½");
+		System.out.println("193909 ï¿½ï¿½ï¿½Ø¹ï¿½");
+		System.out.println("193620 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+		System.out.println("193620 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ®ï¿½ï¿½ï¿½Ô´Ï´ï¿½.");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ 12:17");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ 12:28");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ 07:45");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ 10:55");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ 09:30");
 		
 >>>>>>> refs/remotes/origin/main
 	}
