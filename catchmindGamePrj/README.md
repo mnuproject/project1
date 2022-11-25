@@ -1,5 +1,4 @@
-
-# ChatchMind Game
+# ChatchMind Game https://github.com/ehszl409/project_catchmindGame 응용
 
 ----------------------------------------
 
