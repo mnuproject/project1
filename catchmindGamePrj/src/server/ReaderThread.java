@@ -5,11 +5,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import client.GameStart;
 import res.Word;
 
 // 서버로 부터 메세지를 받아 TextArea에 뿌려주는 Thread.
-class ReaderThread extends Thread {
-	private BufferedReader reader;
+public class ReaderThread extends Thread {
+	/*private BufferedReader reader;
 
 	@Override
 	public void run() {
@@ -66,55 +67,55 @@ class ReaderThread extends Thread {
 						res.res.brush.printAll(res.res.imgBuff.getGraphics());
 					}
 				} else if (parsReaderMsg[0].equals("SERVER")) {
-					taChat.append("[SERVER]: " + parsReaderMsg[1] + "\n");
+					GameStart.taChat.append("[SERVER]: " + parsReaderMsg[1] + "\n");
 				} else if (parsReaderMsg[0].equals("CHAT") && parsReaderMsg.length > 1) {
-					taChat.append(parsReaderMsg[1] + "\n");
+					GameStart.taChat.append(parsReaderMsg[1] + "\n");
 				} else if (parsReaderMsg[0].equals("START")) {
-					btnReady.setVisible(false);
+					GameStart.btnReady.setVisible(false);
 
 				} else if (parsReaderMsg[0].equals("ID")) {
-					taUserList.setText("");
+					GameStart.taUserList.setText("");
 				} else if (parsReaderMsg[0].equals("IDLIST")) {
-					taUserList.append(parsReaderMsg[1] + "\n");
+					GameStart.taUserList.append(parsReaderMsg[1] + "\n");
 				} else if (parsReaderMsg[0].equals("TURN")) {
-					laQuiz.setText(Word.problem[selectProblem]);
-					laQuiz.setVisible(true);
-					btnSkip.setVisible(true);
-					drawPPAP = true;
-					tfChat.setEnabled(false);
-					plBottom.setVisible(true);
+					GameStart.laQuiz.setText(Word.problem[res.res.selectProblem]);
+					GameStart.laQuiz.setVisible(true);
+					GameStart.btnSkip.setVisible(true);
+					res.res.drawPPAP = true;
+					GameStart.tfChat.setEnabled(false);
+					GameStart.plBottom.setVisible(true);
 					System.out.println("내 턴 임");
 				} else if (parsReaderMsg[0].equals("NOTTURN")) {
-					laQuiz.setVisible(false);
-					btnSkip.setVisible(false);
+					GameStart.laQuiz.setVisible(false);
+					GameStart.btnSkip.setVisible(false);
 					System.out.println("내 턴 아님");
-					brush.setDrawPen(false);
-					drawPPAP = false;
-					tfChat.setEnabled(true);
-					plBottom.setVisible(false);
-					System.out.println(drawPPAP);
+					res.res.brush.setDrawPen(false);
+					res.res.drawPPAP = false;
+					GameStart.tfChat.setEnabled(true);
+					GameStart.plBottom.setVisible(false);
+					System.out.println(res.res.drawPPAP);
 				} else if (parsReaderMsg[0].equals("ANSWER")) {
-					selectProblem++;
-					if (selectProblem >= Word.problem.length) {
-						selectProblem = 0;
+					res.res.selectProblem++;
+					if (res.res.selectProblem >= Word.problem.length) {
+						res.res.selectProblem = 0;
 					}
 				} else if (parsReaderMsg[0].equals("END")) {
-					taChat.append("[SERVER]: " + parsReaderMsg[1] + "\n");
-					btnReady.setVisible(true);
-					tfChat.setEnabled(true);
-					plBottom.setVisible(true);
-					btnSkip.setVisible(false);
-					btnReady.setVisible(true);
-					laQuiz.setVisible(false);
-					drawPPAP = true;
+					GameStart.taChat.append("[SERVER]: " + parsReaderMsg[1] + "\n");
+					GameStart.btnReady.setVisible(true);
+					GameStart.tfChat.setEnabled(true);
+					GameStart.plBottom.setVisible(true);
+					GameStart.btnSkip.setVisible(false);
+					GameStart.btnReady.setVisible(true);
+					GameStart.laQuiz.setVisible(false);
+					res.res.drawPPAP = true;
 				} else {
-					taChat.append("\n");
+					GameStart.taChat.append("\n");
 				}
 				// 스크롤을 밑으로 고정.
-				scrChat.getVerticalScrollBar().setValue(scrChat.getVerticalScrollBar().getMaximum());
+				GameStart.scrChat.getVerticalScrollBar().setValue(GameStart.scrChat.getVerticalScrollBar().getMaximum());
 			}
 		} catch (IOException e) {
-			System.out.println(TAG + "통신 실패");
+			System.out.println(GameStart.TAG + "통신 실패");
 		}
-	}
+	}*/
 }

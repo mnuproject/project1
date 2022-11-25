@@ -1,48 +1,24 @@
 // 최종본
 package client;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.TextField;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
-import java.util.Scanner;
-import java.util.Vector;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+import java.util.*;
+import javax.swing.*;
 import javax.swing.border.*;
 
+import UI.MainFrame;
 import res.Word;
 
 public class GameStart extends JFrame {
-	// 필수 태그
-	private static final String TAG = "GameStart :";
+/*	// 필수 태그
+	public static final String TAG = "GameStart :";
 	// 클라이언트가 입력한 아이디 값을 클라이언트도 알도록 전역 변수로 설정.
 	private String IDString;
-
-	// 턴이 변화할 때 마다 제시어를 순차적으로 선택하는 변수.
-	public int selectProblem = 0;
 
 	private ImageIcon icGameStart;
 
@@ -66,9 +42,6 @@ public class GameStart extends JFrame {
 	// plMain에 포함됨
 	private JButton btnStart; // 아이디 입력 전 게임시작 버튼
 
-	// btnStart을 누르면 plId이 나타남
-	private JPanel plId; // 아이디 입력 패널
-	private JPanel plSub; // 아이디 입력 패널
 
 	// plId에 포함됨
 	private JLabel laId; // '아이디를 입력하세요'라벨
@@ -88,8 +61,8 @@ public class GameStart extends JFrame {
 
 	// plTop에 포함됨
 	private JLabel laQuizTitle; // '제시어 : ' 라벨
-	private JLabel laQuiz; // 제시어 변수 라벨
-	private JButton btnSkip; // 넘기기 버튼
+	public static JLabel laQuiz; // 제시어 변수 라벨
+	public static JButton btnSkip; // 넘기기 버튼
 
 	// 왼쪽을 포함한 중간 그림판
 	private JPanel plMplId; // 그림판
@@ -98,7 +71,7 @@ public class GameStart extends JFrame {
 	private MyPanel1 plDraw; // 그림판 이미지
 
 	// 아래쪽 팔레트
-	private JPanel plBottom; // 팔레트
+	public static JPanel plBottom; // 팔레트
 
 	private MyButton1 btnDelete; // 지우개 이미지
 
@@ -120,22 +93,22 @@ public class GameStart extends JFrame {
 	private JPanel plEast;
 
 	// plEast에 포함됨
-	private JTextArea taUserList; // 유저 목록 라벨
+	public static JTextArea taUserList; // 유저 목록 라벨
 
 	// plEast에 포함된 채팅 패널
-	private JPanel plChat; // 채팅창, 채팅 입력란
+	public static JPanel plChat; // 채팅창, 채팅 입력란
 
 	// plChat에 포함됨
-	private TextField tfChat; // 채팅 입력
+	public static TextField tfChat; // 채팅 입력
 	public static JTextArea taChat; // 채팅 로그
-	private JScrollPane scrChat;
+	public static JScrollPane scrChat;
 
 	// 준비완료, 나가기 버튼 패널
 	private JPanel btnPanel; // 채팅창, 채팅 입력란
 
 	// btnPanel에 포함됨
-	private JButton btnReady; // 준비 완료 버튼
-	private JButton btnExit; // 나가기 버튼
+	public static JButton btnReady; // 준비 완료 버튼
+	public static JButton btnExit; // 나가기 버튼
 
 	// 폰트 크기 설정
 	private Font ftSmall; // 16px크기 폰트
@@ -152,7 +125,7 @@ public class GameStart extends JFrame {
 
 	class MyPanel1 extends JPanel {
 		private ImageIcon icon = new ImageIcon("img/draw.png");
-		private Image imgMain = icon.getImage();
+	 	private Image imgMain = icon.getImage();
 
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
@@ -209,8 +182,8 @@ public class GameStart extends JFrame {
 		btnDelete = new MyButton1(); // plBottom - 휴지통 이미지
 
 		// 패널
-		plId = new JPanel(); // plMain - 초기 아이디 입력 패널
-		plSub = new JPanel(); // plMain - 초기 아이디 입력 패널
+	//	plId = new JPanel(); // plMain - 초기 아이디 입력 패널
+	//	plSub = new JPanel(); // plMain - 초기 아이디 입력 패널
 		plDrawRoom = new JPanel(); // 아이디를 입력하고 버튼을 누르면 나오는 패널, 게임화면 전체
 
 		// plDrawRoom
@@ -468,262 +441,11 @@ public class GameStart extends JFrame {
 		setSize(800, 640);
 	}
 
-	private void batch() {
-		plMain.add(btnStart);
-		plMain.add(plId);
-		plMain.add(plDrawRoom);
-		btnStart.setIcon(icGameStart);
-
-		plId.add(plSub);
-		plSub.add(laId);
-		plSub.add(tfIdInput);
-		plId.add(btnId);
-		btnId.setIcon(icGameStart);
-
-		plDrawRoom.add(plTopMpId);
-
-		plTopMpId.add(plTop);
-		plTopMpId.add(plMplId);
-
-		plDrawRoom.add(plBottom);
-		plDrawRoom.add(plEast);
-		plDrawRoom.add(btnPanel);
-
-//		plMplId.add(plDraw);
-
-		plBottom.add(plPalette);
-		plBottom.add(btnEraser);
-		plBottom.add(btnDelete);
-
-		plPalette.add(btnBlackDrawPen);
-		plPalette.add(btnRedDrawPen);
-		plPalette.add(btnOrangeDrawPen);
-		plPalette.add(btnYellowDrawPen);
-		plPalette.add(btnGreenDrawPen);
-		plPalette.add(btnBlueDrawPen);
-		plPalette.add(btnIndigoDrawPen);
-		plPalette.add(btnPurpleDrawPen);
-
-		plEast.add(plChat);
-		plEast.add(taUserList);
-
-		plChat.add(scrChat);
-		plChat.add(tfChat);
-
-		btnPanel.add(laQuiz);
-		btnPanel.add(laQuizTitle);
-		btnPanel.add(btnReady);
-		btnPanel.add(btnSkip);
-		btnPanel.add(btnExit);
-
-		// 드로우
-		plMplId.add(res.res.drawLabel);
-		plMplId.add(res.res.brush);
-
-	}
-
-	private void listener() {
-		// Enter 입력시 채팅 메세지가 보내지는 이벤트.
-		tfChat.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				sendChat();
-			}
-		});
-
-		// 이 이벤트로 plId이 활성화 되어서 아이디를 입력할 수 있음.
-		btnStart.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JButton btnStart = (JButton) e.getSource();
-				plId.setVisible(true); // plId 활성화
-				plSub.setVisible(true); // plId 활성화
-				btnStart.setVisible(false); // btnStart 비활성화
-			}
-		});
-
-		// 이 이벤트로 plDrawRoom이 활성화 되어서 그리기방에 입장함.
-		btnId.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// JButton btnId = (JButton)e.getSource();
-				connectServer(); // 서버와 연결
-				sendInsertId();
-			}
-		});
-
-		// 나가기 버튼 이벤트.
-		btnExit.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				sendExit();
-				System.exit(0);
-			}
-		});
-
-		// 준비 버튼 이벤트.
-		btnReady.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				sendReady();
-			}
-		});
-
-		// 넘기기 버튼 이벤트.
-		btnSkip.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				sendSkip();
-			}
-		});
-		// 마우스를 눌렀을때 그리는 이벤트
-
-		res.res.drawLabel.addMouseMotionListener(new MouseMotionListener() {
-			@Override
-			public void mouseMoved(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseDragged(MouseEvent e) {
-				if (res.res.drawPPAP == true) {
-					System.out.println("ppap true 실행 됨");
-					res.res.sendDraw = "DRAW&" + e.getX() + "," + e.getY();
-					res.brush.xx = e.getX();
-					res.res.brush.yy = e.getY();
-					res.res.brush.repaint();
-					res.res.brush.printAll(res.res.imgBuff.getGraphics());
-					writer.println(res.res.sendDraw);
-				} else {
-					System.out.println("ppap false 실행 됨");
-				}
-			}
-		});
-
-		// 검은색 펜 이벤트
-		btnBlackDrawPen.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				res.res.sendColor = "COLOR&" + "Black";
-				res.res.brush.setColor(Color.BLACK);
-				writer.println(res.res.sendColor);
-				System.out.println("색 변경 : " + res.res.sendColor);
-			}
-		});
-		// 빨간색 펜 이벤트
-		btnRedDrawPen.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				res.res.sendColor = "COLOR&" + "Red";
-				res.res.brush.setColor(Color.RED);
-				writer.println(res.res.sendColor);
-				System.out.println("색 변경 : " + res.res.sendColor);
-			}
-		});
-		// 오렌지색 펜 이벤트
-		btnOrangeDrawPen.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				res.res.sendColor = "COLOR&" + "Orange";
-				res.res.brush.setColor(Color.ORANGE);
-				writer.println(res.res.sendColor);
-				System.out.println("색 변경 : " + res.res.sendColor);
-			}
-		});
-		// 노란색 펜 이벤트
-		btnYellowDrawPen.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				res.res.sendColor = "COLOR&" + "Yellow";
-				res.res.brush.setColor(Color.YELLOW);
-				writer.println(res.res.sendColor);
-				System.out.println("색 변경 : " + res.res.sendColor);
-			}
-		});
-		// 초록색 펜 이벤트
-		btnGreenDrawPen.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				res.res.sendColor = "COLOR&" + "Green";
-				res.res.brush.setColor(Color.GREEN);
-				writer.println(res.res.sendColor);
-				System.out.println("색 변경 : " + res.res.sendColor);
-			}
-		});
-		// 하늘색 펜 이벤트
-		btnBlueDrawPen.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				res.res.sendColor = "COLOR&" + "Blue";
-				res.res.brush.setColor(Color.CYAN);
-				writer.println(res.res.sendColor);
-				System.out.println("색 변경 : " + res.res.sendColor);
-			}
-		});
-		// 파란색 펜 이벤트
-		btnIndigoDrawPen.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				res.res.sendColor = "COLOR&" + "Indigo";
-				res.res.brush.setColor(Color.BLUE);
-				writer.println(res.res.sendColor);
-				System.out.println("색 변경 : " + res.res.sendColor);
-			}
-		});
-		// 핑크색 펜 이벤트
-		btnPurpleDrawPen.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				res.res.sendColor = "COLOR&" + "Purple";
-				res.res.brush.setColor(Color.PINK);
-				writer.println(res.res.sendColor);
-				System.out.println("색 변경 : " + res.res.sendColor);
-			}
-		});
-		// 지우개(흰색) 이벤트
-		btnEraser.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				res.res.sendColor = "COLOR&" + "White";
-				res.res.brush.setColor(Color.WHITE);
-				writer.println(res.res.sendColor);
-				System.out.println("색 변경 : " + res.res.sendColor);
-			}
-		});
-		// 드로우 캔버스 초기화 이벤트
-		btnDelete.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("delete 버튼 눌러짐");
-				res.res.sendColor = "COLOR&" + "Delete";
-				writer.println(res.res.sendColor);
-				res.res.brush.setClearC(false);
-				cleanDraw();
-				System.out.println("드로우 캔버스 초기화");
-			}
-		});
-	}
-
 	// 접속 시 서버 연결 메서드.
 	private void connectServer() {
 		try {
 			socket = new Socket("localhost", 3000);
-			ReaderThread rt = new ReaderThread();
+			server.ReaderThread rt = new server.ReaderThread();
 			rt.start();
 		} catch (Exception e) {
 			System.out.println(TAG + "서버 연결 실패");
@@ -805,8 +527,8 @@ public class GameStart extends JFrame {
 		res.res.brush.repaint();
 		res.res.brush.printAll(res.res.imgBuff.getGraphics());
 	}
-
+*/
 	public static void main(String[] args) {
-		new GameStart();
+		new MainFrame(); 
 	}
 }
