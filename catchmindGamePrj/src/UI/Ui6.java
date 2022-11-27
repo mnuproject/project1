@@ -28,7 +28,7 @@ public class Ui6 extends JPanel{
 		JPanel titlePanel = new JPanel();
 		titlePanel.setLayout(null);
 		titlePanel.setBackground(new Color(239, 141, 228));
-		titlePanel.setBounds(0, 20, 190, 130);
+		titlePanel.setBounds(15, 20, 190, 130);
 		JLabel playTitle = new JLabel("캐치마인드");
 		playTitle.setFont(uiTool.ftMedium());
 		playTitle.setBounds(0, 15, 190, 30);
