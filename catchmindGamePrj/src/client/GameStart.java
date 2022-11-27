@@ -529,6 +529,6 @@ public class GameStart extends JFrame {
 	}
 */
 	public static void main(String[] args) {
-		new MainFrame(); 
+		MainFrame.getMainFrame();
 	}
 }

@@ -10,6 +10,8 @@ public class Ui2 extends JPanel{
 	private JButton plBtn1;
 	private JLabel plImg1;
 	
+	private TextField tfIdInput;
+	
 	public Ui2() {
 		uiTool = new UiTool();
 		setLayout(null);
@@ -22,9 +24,16 @@ public class Ui2 extends JPanel{
 		plId1.setBackground(new Color(255, 255, 255));
 		plId1.setBounds(0, 50, 400, 50);
 		
-		plBtn1 = new JButton("UI2 버튼생성 예시");
+		plId1 = new JLabel("UI2 라벨생성 예시");
+		plId1.setBackground(new Color(255, 255, 255));
+		plId1.setBounds(0, 50, 400, 50);
+		
+		plBtn1 = new JButton("로그인");
 		plBtn1.setBackground(new Color(255, 255, 255));
 		plBtn1.setBounds(0, 100, 100, 30);
+		
+		tfIdInput = new TextField();
+		tfIdInput.setBounds(50, 300, 100, 30);
 		
 		plImg1 = new JLabel();
 		plImg1.setIcon(uiTool.getImg("img/drawBlackPen.png", 50, 100));
@@ -33,13 +42,15 @@ public class Ui2 extends JPanel{
 		add(plId1);
 		add(plBtn1);
 		add(plImg1);
+		add(tfIdInput);
 	}
 	
 	private void uI2_listener() {
 		plBtn1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("버튼 클릭");
+				//protocol.add()
+				System.out.println(tfIdInput.getText());
 			}
 		});
 	}

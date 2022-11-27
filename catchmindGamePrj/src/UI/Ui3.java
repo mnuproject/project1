@@ -11,7 +11,7 @@ public class Ui3 extends JPanel{
 	private JLabel plImg1;
 	
 	public Ui3() {
-		uiTool = new UiTool();
+		//uiTool = new UiTool();
 		setLayout(null);
 		uI1_DesignLayout();
 		uI1_listener();

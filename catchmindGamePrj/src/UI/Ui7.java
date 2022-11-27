@@ -18,11 +18,11 @@ public class Ui7 extends JPanel{
 	}	
 	
 	private void uI1_DesignLayout() {
-		plId1 = new JLabel("UI1 라벨생성 예시");
+		plId1 = new JLabel("UI7 라벨생성 예시");
 		plId1.setBackground(new Color(255, 255, 255));
 		plId1.setBounds(0, 50, 400, 50);
 		
-		plBtn1 = new JButton("UI1 버튼생성 예시");
+		plBtn1 = new JButton("UI7 버튼생성 예시");
 		plBtn1.setBackground(new Color(255, 255, 255));
 		plBtn1.setBounds(0, 100, 100, 30);
 		
