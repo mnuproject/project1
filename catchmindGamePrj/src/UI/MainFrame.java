@@ -8,7 +8,7 @@ public class MainFrame extends JFrame{
 		setTitle("캐치마인드");
 		setResizable(false);
 		setSize(1100, 750);
-		add(new Ui3());
+		add(new Ui2());
 		
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
