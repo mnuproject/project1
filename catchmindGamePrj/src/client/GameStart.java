@@ -497,6 +497,6 @@ public class GameStart extends JFrame {
 */
 	public static void main(String[] args) {
 		MainFrame.getMainFrame();
-		UiTool.mainFrame.setUI(new Ui1());
+		UiTool.mainFrame.setUI(new Ui5());
 	}
 }
