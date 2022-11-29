@@ -2,7 +2,6 @@
 package client;
 
 import java.awt.*;
-import java.awt.TextField;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
@@ -11,8 +10,7 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
-import UI.MainFrame;
-import res.Word;
+import UI.*;
 
 public class GameStart extends JFrame {
 /*	// 필수 태그
@@ -122,37 +120,6 @@ public class GameStart extends JFrame {
 		ImageIcon xyImage = new ImageIcon(yImage);
 		return xyImage;
 	}
-
-	class MyPanel1 extends JPanel {
-		private ImageIcon icon = new ImageIcon("img/draw.png");
-	 	private Image imgMain = icon.getImage();
-
-		public void paintComponent(Graphics g) {
-			super.paintComponent(g);
-			g.drawImage(imgMain, 0, 0, getWidth(), getHeight(), null);
-		}
-	};
-
-	class MyPanel2 extends JPanel {
-		private ImageIcon icon = new ImageIcon("img/drawColor.png");
-		private Image imgMain = icon.getImage();
-
-		public void paintComponent(Graphics g) {
-			super.paintComponent(g);
-			g.drawImage(imgMain, 0, 0, getWidth(), getHeight(), null);
-		}
-	};
-
-	class MyButton extends JButton {
-		private ImageIcon icon = new ImageIcon("img/drawEraser.png");
-		private Image imgMain = icon.getImage();
-
-		public void paintComponent(Graphics g) {
-			super.paintComponent(g);
-			g.drawImage(imgMain, 0, 0, getWidth(), getHeight(), null);
-			setBorderPainted(false); // 버튼 테두리 제거
-		}
-	};
 
 	class MyButton1 extends JButton {
 		private ImageIcon icon = new ImageIcon("img/allDelete.png");
@@ -530,5 +497,6 @@ public class GameStart extends JFrame {
 */
 	public static void main(String[] args) {
 		MainFrame.getMainFrame();
+		UiTool.mainFrame.setUI(new Ui1());
 	}
 }

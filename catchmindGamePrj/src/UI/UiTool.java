@@ -6,7 +6,7 @@ import javax.imageio.*;
 import javax.swing.*;
 
 public class UiTool {
-	//private JPanel[] uiList = {new Ui1(), new Ui2(), new Ui3(), new Ui4(), new Ui5(), new Ui6(), new Ui7()};
+	public static MainFrame mainFrame;
 	
 	public UiTool() {
 		
@@ -36,11 +36,20 @@ public class UiTool {
 		return new Font("맑은고딕", Font.BOLD, 36);	
 	}
 
+	public void setUI(JPanel rmPanel, JPanel panel) {
+		UiTool.mainFrame.setUI(rmPanel, panel);
+	}
 	
-	/*public void setUI(int removeUi, int UI) {
-		if (removeUi > 0) {
-			MainFrame.getMainFrame().getContentPane().remove(uiList[removeUi]);
-			MainFrame.getMainFrame().add(uiList[UI]);
-		}
-	}*/
+	/*
+	public void setUI1(JPanel rmPanel, JPanel panel) {
+		mainFrame.getContentPane().remove(rmPanel);
+		mainFrame.add(panel);
+		mainFrame.setVisible(true);
+	}
+	
+	public void setUI1(JPanel panel) {
+		mainFrame.add(panel);
+		mainFrame.setVisible(true);
+	}
+	*/
 }

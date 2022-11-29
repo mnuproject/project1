@@ -53,8 +53,8 @@ public class Ui1 extends JPanel{
 		plBtn1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				uiTool.setUI(Ui1.this, new Ui2());
 			}
 		});
-	}
+	}	
 }

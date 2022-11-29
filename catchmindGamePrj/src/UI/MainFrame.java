@@ -8,7 +8,6 @@ public class MainFrame extends JFrame{
 		setTitle("캐치마인드");
 		setResizable(false);
 		setSize(1100, 750);
-		add(new Ui6());
 		
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -16,8 +15,19 @@ public class MainFrame extends JFrame{
 	
 	public static MainFrame getMainFrame() {
 		if (singleton == null) {
-			singleton = new MainFrame();
+			UiTool.mainFrame = new MainFrame();
 		}
-		return singleton;
+		return UiTool.mainFrame;
+	}
+	
+	public void setUI(JPanel rmPanel, JPanel panel) {
+		getContentPane().remove(rmPanel);
+		add(panel);
+		setVisible(true);
+	}
+	
+	public void setUI(JPanel panel) {
+		add(panel);
+		setVisible(true);
 	}
 }
