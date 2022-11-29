@@ -70,6 +70,7 @@ public class Ui6 extends JPanel{
 	
 	
 	public Ui6() {
+		System.out.println("test");
 		uiTool = new UiTool();
 		soundEffect = new SoundEffect();
 		setLayout(null);
