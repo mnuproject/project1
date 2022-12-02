@@ -2,9 +2,13 @@ package UI;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
+import java.net.Socket;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
+import client.*;
 import gameSound.SoundEffect;
 
 public class Ui6 extends JPanel{
@@ -12,67 +16,66 @@ public class Ui6 extends JPanel{
 	private SoundEffect soundEffect;
 	
 	//Title
-	public static  JLabel playTitle;
-	public static  JLabel playTurn;
+	public static JLabel playTitle;
+	public static JLabel playTurn;
 	
 	//profile
-	public static  JLabel idProfileID1;
-	public static  JLabel idProfileScore1;
-	public static  JLabel idProfileReady1;
-	public static  JLabel idProfileID2;
-	public static  JLabel idProfileScore2;
-	public static  JLabel idProfileReady2;
-	public static  JLabel idProfileID3;
-	public static  JLabel idProfileScore3;
-	public static  JLabel idProfileReady3;
-	public static  JLabel idProfileID4;
-	public static  JLabel idProfileScore4;
-	public static  JLabel idProfileReady4;
-	
-	//screen
-	public static  Screen screen;
+	public static JLabel idProfileID1;
+	public static JLabel idProfileScore1;
+	public static JLabel idProfileReady1;
+	public static JLabel idProfileID2;
+	public static JLabel idProfileScore2;
+	public static JLabel idProfileReady2;
+	public static JLabel idProfileID3;
+	public static JLabel idProfileScore3;
+	public static JLabel idProfileReady3;
+	public static JLabel idProfileID4;
+	public static JLabel idProfileScore4;
+	public static JLabel idProfileReady4;
 	
 	//time
-	public static  JProgressBar timeProgress;
-	public static  int timeValue = 30;
+	public static JProgressBar timeProgress;
+	public static int timeValue = 30;
+	
+	//screen
+	private Screen screen;
 	
 	//draw
-	public static  JButton btnBlackDrawPen;
-	public static  JButton btnRedDrawPen;
-	public static  JButton btnOrangeDrawPen;
-	public static  JButton btnYellowDrawPen;
-	public static  JButton btnGreenDrawPen;
-	public static  JButton btnBlueDrawPen;
-	public static  JButton btnIndigoDrawPen;
-	public static  JButton btnPurpleDrawPen;
-	public static  JButton btnEraser;
-	public static  JButton btnAllDelete;
+	private JButton btnBlackDrawPen;
+	private JButton btnRedDrawPen;
+	private JButton btnOrangeDrawPen;
+	private JButton btnYellowDrawPen;
+	private JButton btnGreenDrawPen;
+	private JButton btnBlueDrawPen;
+	private JButton btnIndigoDrawPen;
+	private JButton btnPurpleDrawPen;
+	private JButton btnEraser;
+	private JButton btnAllDelete;
 	
 	//chat
 	private JScrollPane scrChat;
-	public static  JTextArea taChat;
-	public static  JTextField sendChat;
-	public static  JButton btnSendChat;
+	public static JTextArea taChat;
+	public static JTextField sendChat;
+	public static JButton btnSendChat;
 	
 	//item
-	public static  JButton btnItem1;
-	public static  JLabel numItem1;
-	public static  JButton btnItem2;
-	public static  JLabel numItem2;
-	public static  JButton btnItem3;
-	public static  JLabel numItem3;
-	public static  JButton btnItem4;
-	public static  JLabel numItem4;
+	public static JButton btnItem1;
+	public static JLabel numItem1;
+	public static JButton btnItem2;
+	public static JLabel numItem2;
+	public static JButton btnItem3;
+	public static JLabel numItem3;
+	public static JButton btnItem4;
+	public static JLabel numItem4;
 	
 	//ready
-	public static  JButton btnReady;
-	public static  boolean isReady = false;
-	
+	public static JButton btnReady;
+
 	
 	public Ui6() {
-		System.out.println("test");
 		uiTool = new UiTool();
 		soundEffect = new SoundEffect();
+			
 		setLayout(null);
 		setBackground(new Color(239, 228, 176));
 		uI6_DesignLayout();
@@ -180,7 +183,6 @@ public class Ui6 extends JPanel{
 		IdProfile.add(IdProfile4);
 		add(IdProfile);
 		
-		
 		// chat
 		JPanel chatPanel = new JPanel();
 		chatPanel.setLayout(null);
@@ -264,7 +266,7 @@ public class Ui6 extends JPanel{
 		
 		//time
 		timeProgress = new JProgressBar();
-		timeProgress.setValue(30);
+		timeProgress.setValue(timeValue);
 		timeProgress.setBounds(200, 0, 650, 30);
 		add(timeProgress);
 		
@@ -340,9 +342,10 @@ public class Ui6 extends JPanel{
 		add(btnAllDelete);
 		
 		//screen
-		screen = new Screen();
+		screen = Screen.getScreen();
 		screen.setBounds(200, 40, 650, 520);
 		screen.setBackground(new Color(0xffffff));
+		screen.setColor(Color.BLACK);
 		add(screen);
 	}
 	
@@ -351,6 +354,7 @@ public class Ui6 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				taChat.setText(taChat.getText()+"\n"+"black pen");
+				MainFrame.clnt.sendColor("Black");
 				screen.setColor(Color.BLACK);
 			}
 		});
@@ -359,6 +363,7 @@ public class Ui6 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				taChat.setText(taChat.getText()+"\n"+"red pen");
+				MainFrame.clnt.sendColor("Red");
 				screen.setColor(Color.RED);
 			}
 		});
@@ -367,6 +372,7 @@ public class Ui6 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				taChat.setText(taChat.getText()+"\n"+"orange pen");
+				MainFrame.clnt.sendColor("Orange");
 				screen.setColor(Color.ORANGE);
 			}
 		});
@@ -375,6 +381,7 @@ public class Ui6 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				taChat.setText(taChat.getText()+"\n"+"yellow pen");
+				MainFrame.clnt.sendColor("Yellow");
 				screen.setColor(Color.YELLOW);
 			}
 		});
@@ -383,6 +390,7 @@ public class Ui6 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				taChat.setText(taChat.getText()+"\n"+"green pen");
+				MainFrame.clnt.sendColor("Green");
 				screen.setColor(Color.GREEN);
 			}
 		});
@@ -391,6 +399,7 @@ public class Ui6 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				taChat.setText(taChat.getText()+"\n"+"blue pen");
+				MainFrame.clnt.sendColor("Cyan");
 				screen.setColor(Color.CYAN);
 			}
 		});
@@ -398,7 +407,8 @@ public class Ui6 extends JPanel{
 		btnIndigoDrawPen.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				taChat.setText(taChat.getText()+"\n"+"indigo pen");
+				taChat.setText(taChat.getText()+"\n"+"blue pen");
+				MainFrame.clnt.sendColor("Blue");
 				screen.setColor(Color.BLUE);
 			}
 		});
@@ -407,6 +417,7 @@ public class Ui6 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				taChat.setText(taChat.getText()+"\n"+"purple pen");
+				MainFrame.clnt.sendColor("Purple");
 				screen.setColor(Color.MAGENTA);
 			}
 		});
@@ -415,7 +426,7 @@ public class Ui6 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				taChat.setText(taChat.getText()+"\n"+"eraser pen");
-				
+				screen.setEraser();
 			}
 		});
 		
@@ -447,7 +458,8 @@ public class Ui6 extends JPanel{
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == 10 && sendChat.getText().length() > 0) {
-					taChat.setText(taChat.getText()+"\n"+sendChat.getText());
+					MainFrame.clnt.sendChat(sendChat.getText());
+					//taChat.setText(taChat.getText()+"\n"+);
 					sendChat.setText("");
 				}
 			}
@@ -462,6 +474,7 @@ public class Ui6 extends JPanel{
 		btnItem1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				MainFrame.clnt.sendItem1("item1");
 				taChat.setText(taChat.getText()+"\n"+"item1");
 			}
 		});	
@@ -490,8 +503,9 @@ public class Ui6 extends JPanel{
 		btnReady.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				isReady = !isReady;
-				if (isReady) {
+				Client.isReady = !Client.isReady;
+				if (Client.isReady) {
+					MainFrame.clnt.sendReady();
 					taChat.setText(taChat.getText()+"\n"+"ready");
 					idProfileReady1.setVisible(true);
 					idProfileReady2.setVisible(true);
@@ -500,7 +514,7 @@ public class Ui6 extends JPanel{
 					btnReady.setBackground(new Color(239, 141, 228));
 					btnReady.setText("준비됨");
 				}
-				else if (!isReady) {
+				else if (!Client.isReady) {
 					idProfileReady1.setVisible(false);
 					idProfileReady2.setVisible(false);
 					idProfileReady3.setVisible(false);

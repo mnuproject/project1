@@ -33,11 +33,8 @@ public class Log {
 	 * client > GameStart에서
 	 * UiTool.mainFrame.setUI(new Ui1()); 이 부분 수정!
 	 * 
+	 * !! 
+	 * [오류] linkedList 넘기기
 	 * 
-	 * v 1.0.5
-	 * [진행] UI5 작업 중 , 작업자 : 손정현
-	 * 목표는 JButton에 이미지를 넣고 싶었는데, JFrame이 아닌 JPanel을 상속받고(?) 있어서 안됨.
-	 * 그냥 JLabel의 이미지를 넣어 만듬. 일단은 UI 5(테마선택) 완성.
-	 * [완료] UI 5 완성. 다음에 수정할 게 있으면 수정할 예정
 	 * */
 }

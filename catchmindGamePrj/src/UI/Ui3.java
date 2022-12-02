@@ -30,7 +30,7 @@ public class Ui3 extends JPanel{
 	private void uI1_DesignLayout() {
 		
 		plImg1 = new JLabel();
-		plImg1.setIcon(uiTool.getImg("img/cloud_img.jpg", 1100, 750));
+		plImg1.setIcon(uiTool.getImg("img/cloudimg.png", 1100, 750));
 		plImg1.setBounds(0,0,1100,750);
 		
 		plBtn1 = new JButton("방만들기");

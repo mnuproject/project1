@@ -6,8 +6,6 @@ import javax.imageio.*;
 import javax.swing.*;
 
 public class UiTool {
-	public static MainFrame mainFrame;
-	
 	public UiTool() {
 		
 	}
@@ -37,19 +35,8 @@ public class UiTool {
 	}
 
 	public void setUI(JPanel rmPanel, JPanel panel) {
-		UiTool.mainFrame.setUI(rmPanel, panel);
+		MainFrame.getMainFrame().setUI(rmPanel, panel);
 	}
 	
-	/*
-	public void setUI1(JPanel rmPanel, JPanel panel) {
-		mainFrame.getContentPane().remove(rmPanel);
-		mainFrame.add(panel);
-		mainFrame.setVisible(true);
-	}
 	
-	public void setUI1(JPanel panel) {
-		mainFrame.add(panel);
-		mainFrame.setVisible(true);
-	}
-	*/
 }

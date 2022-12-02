@@ -1,10 +1,16 @@
 package UI;
 import javax.swing.*;
 
+import client.Client;
+
 public class MainFrame extends JFrame{
-	private static MainFrame singleton;
+	public static MainFrame singleton;
+	public static Client clnt;
 	
 	private MainFrame() {
+		clnt = new Client();
+		clnt.connectServer();
+		
 		setTitle("캐치마인드");
 		setResizable(false);
 		setSize(1100, 750);
@@ -15,9 +21,9 @@ public class MainFrame extends JFrame{
 	
 	public static MainFrame getMainFrame() {
 		if (singleton == null) {
-			UiTool.mainFrame = new MainFrame();
+			singleton = new MainFrame();
 		}
-		return UiTool.mainFrame;
+		return singleton;
 	}
 	
 	public void setUI(JPanel rmPanel, JPanel panel) {
