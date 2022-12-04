@@ -10,6 +10,32 @@ public class Log {
 	 * 프로그래밍 기초프로젝트 D조
 	 * ------------------------
 	 * 
+	 * 공지
+	 * =============================================================================
+	 * [음악파일]
+	 * https://convertio.co/kr/mp3-wav/
+	 * 주파수 48000hz, .wav파일로 변경 후 저장
+	 * 
+	 * [참고자료 적기]
+	 * 사용한 음악, 이미지, 다른 자료들을 log파일에 기록해주세요 
+	 * 
+	 * 
+	 * 참고자료
+	 * ==============================================================================
+	 * [캐치마인드 응용]
+	 * https://github.com/ehszl409/project_catchmindGame
+	 * 
+	 * [BGM]
+	 * [잔잔한 음악] https://m.blog.naver.com/edcc3080/221783348866
+	 * [효과음 -스핀] https://m.blog.naver.com/shacomaniac/222022213250
+	 * [mp3 -> wav] https://convertio.co/kr/mp3-wav/
+	 * 
+	 * [이미지]
+	 * [캐치마인드 img] https://github.com/ehszl409/project_catchmindGame
+	 * 
+	 * 
+	 * 작업상황
+	 * ==============================================================================
 	 * v 1.0.0
 	 * [진행] UI6 작업 중
 	 * [오류] UiTool -statckOverflow
@@ -35,6 +61,8 @@ public class Log {
 	 * 
 	 * !! 
 	 * [오류] linkedList 넘기기
+	 * 
+	 * 
 	 * 
 	 * */
 }

@@ -1,5 +1,8 @@
-/client/
 /UI/
+/client/
+/resources/
+/gameSound/
 /protocol/
-/server/
+/item/
 /manage/
+/server/

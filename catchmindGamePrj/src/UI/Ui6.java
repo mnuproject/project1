@@ -9,11 +9,12 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 
 import client.*;
-import gameSound.SoundEffect;
+import item.*;
+import gameSound.GameSound;
 
 public class Ui6 extends JPanel{
 	private UiTool uiTool;
-	private SoundEffect soundEffect;
+	private GameSound soundEffect;
 	
 	//Title
 	public static JLabel playTitle;
@@ -53,7 +54,7 @@ public class Ui6 extends JPanel{
 	private JButton btnAllDelete;
 	
 	//chat
-	private JScrollPane scrChat;
+	public static JScrollPane scrChat;
 	public static JTextArea taChat;
 	public static JTextField sendChat;
 	public static JButton btnSendChat;
@@ -74,8 +75,8 @@ public class Ui6 extends JPanel{
 	
 	public Ui6() {
 		uiTool = new UiTool();
-		soundEffect = new SoundEffect();
-			
+		soundEffect = new GameSound("bgm/bg1.wav");
+
 		setLayout(null);
 		setBackground(new Color(239, 228, 176));
 		uI6_DesignLayout();
@@ -398,7 +399,7 @@ public class Ui6 extends JPanel{
 		btnBlueDrawPen.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				taChat.setText(taChat.getText()+"\n"+"blue pen");
+				taChat.setText(taChat.getText()+"\n"+"cyan pen");
 				MainFrame.clnt.sendColor("Cyan");
 				screen.setColor(Color.CYAN);
 			}
@@ -426,6 +427,7 @@ public class Ui6 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				taChat.setText(taChat.getText()+"\n"+"eraser pen");
+				MainFrame.clnt.sendColor("Eraser");
 				screen.setEraser();
 			}
 		});
@@ -434,6 +436,7 @@ public class Ui6 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				taChat.setText(taChat.getText()+"\n"+"all delete pen");
+				MainFrame.clnt.sendColor("Delete");
 				screen.setClear();
 			}
 		});
@@ -442,7 +445,8 @@ public class Ui6 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (sendChat.getText().length() > 0) {
-					taChat.setText(taChat.getText()+"\n"+sendChat.getText());
+					MainFrame.clnt.sendChat(sendChat.getText());
+					//taChat.setText(taChat.getText()+"\n"+sendChat.getText());
 					sendChat.setText("");					
 				}
 			}
@@ -459,7 +463,7 @@ public class Ui6 extends JPanel{
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == 10 && sendChat.getText().length() > 0) {
 					MainFrame.clnt.sendChat(sendChat.getText());
-					//taChat.setText(taChat.getText()+"\n"+);
+					//taChat.setText(taChat.getText()+"\n"+sendChat.getText());
 					sendChat.setText("");
 				}
 			}
@@ -476,6 +480,9 @@ public class Ui6 extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				MainFrame.clnt.sendItem1("item1");
 				taChat.setText(taChat.getText()+"\n"+"item1");
+				playTitle.setFont(uiTool.ftSmall());
+				playTitle.setText("제시어 : 동물");
+				new TimerTh().start();
 			}
 		});	
 		
@@ -483,6 +490,8 @@ public class Ui6 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				taChat.setText(taChat.getText()+"\n"+"item2");
+				playTitle.setText("제시어 : 쿠키");
+				new TimerTh().start();
 			}
 		});	
 		
@@ -490,6 +499,8 @@ public class Ui6 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				taChat.setText(taChat.getText()+"\n"+"item3");
+				playTitle.setText("제시어 : 귤");
+				new TimerTh().start();
 			}
 		});	
 		
@@ -497,24 +508,28 @@ public class Ui6 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				taChat.setText(taChat.getText()+"\n"+"item4");
+				playTitle.setText("제시어 : 오버워치");
+				new TimerTh().start();
 			}
 		});	
 		
 		btnReady.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {	
 				Client.isReady = !Client.isReady;
 				if (Client.isReady) {
-					MainFrame.clnt.sendReady();
+					MainFrame.clnt.sendReady("-");
 					taChat.setText(taChat.getText()+"\n"+"ready");
 					idProfileReady1.setVisible(true);
 					idProfileReady2.setVisible(true);
 					idProfileReady3.setVisible(true);
 					idProfileReady4.setVisible(true);
 					btnReady.setBackground(new Color(239, 141, 228));
+					soundEffect.playEffect("bgm/effect_ring.wav");
 					btnReady.setText("준비됨");
 				}
 				else if (!Client.isReady) {
+					soundEffect.stop();
 					idProfileReady1.setVisible(false);
 					idProfileReady2.setVisible(false);
 					idProfileReady3.setVisible(false);

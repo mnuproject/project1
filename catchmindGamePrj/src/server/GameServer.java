@@ -3,7 +3,6 @@ package server;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Vector;
-import client.ClientInfo;
 
 public class GameServer {
 	private final String TAG = "GameServer : ";
