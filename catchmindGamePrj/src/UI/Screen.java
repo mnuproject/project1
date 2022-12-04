@@ -50,8 +50,8 @@ public class Screen extends Canvas implements MouseMotionListener, ComponentList
 			
 			int siz = mousePointList.size();
 			for (int i=0; i<siz-1; i++){
-				System.out.println(String.format("%d/%d | ori : %d", i, mousePointList.size(), siz));
-				Thread.sleep(300);
+				//System.out.println(String.format("%d/%d | ori : %d", i, mousePointList.size(), siz));
+				//Thread.sleep(300);
 				
 				Point point = mousePointList.get(i);
 				bufferGraphics.setColor(mouseColorList.get(i));
