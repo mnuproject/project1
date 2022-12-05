@@ -6,9 +6,16 @@ import javax.swing.*;
 
 public class Ui4 extends JPanel{
 	private UiTool uiTool;
-	private JLabel plId1;
 	private JButton plBtn1;
+	private JButton plBtn2;
+	private JButton plBtn3;
+	private JButton plBtn4;
+	private JButton plBtn5;
+	private JButton plBtn6;
 	private JLabel plImg1;
+	TextArea ta1 = new TextArea("text area");	
+	TextField tf1 = new TextField("text field");
+	
 	
 	public Ui4() {
 		uiTool = new UiTool();
@@ -18,21 +25,48 @@ public class Ui4 extends JPanel{
 	}	
 	
 	private void uI1_DesignLayout() {
-		plId1 = new JLabel("UI1 라벨생성 예시");
-		plId1.setBackground(new Color(255, 255, 255));
-		plId1.setBounds(0, 50, 400, 50);
-		
-		plBtn1 = new JButton("UI1 버튼생성 예시");
-		plBtn1.setBackground(new Color(255, 255, 255));
-		plBtn1.setBounds(0, 100, 100, 30);
 		
 		plImg1 = new JLabel();
-		plImg1.setIcon(uiTool.getImg("img/drawBlackPen.png", 50, 100));
-		plImg1.setBounds(150, 100, 100, 100);
+		plImg1.setIcon(uiTool.getImg("img/item1.jpg", 235, 247));
+		plImg1.setBounds(805,20,235,247);
 		
-		add(plId1);
-		add(plBtn1);
+		plBtn1 = new JButton("1번 주제");
+		plBtn1.setBackground(new Color(255, 255, 255));
+		plBtn1.setBounds(50, 40, 312, 183);
+		
+		plBtn2 = new JButton("2번 주제");
+		plBtn2.setBackground(new Color(255, 255, 255));
+		plBtn2.setBounds(50, 263, 312, 183);
+		
+		plBtn3 = new JButton("3번 주제");
+		plBtn3.setBackground(new Color(255, 255, 255));
+		plBtn3.setBounds(50, 497, 312, 183);
+		
+		plBtn4 = new JButton("O");
+		plBtn4.setBackground(new Color(255, 255, 255));
+		plBtn4.setBounds(997, 497, 43, 20);
+		
+		plBtn5 = new JButton("준비");
+		plBtn5.setBackground(new Color(255, 255, 255));
+		plBtn5.setBounds(805, 537, 235, 20);
+		
+		plBtn6 = new JButton("시작");
+		plBtn6.setBackground(new Color(255, 255, 255));
+		plBtn6.setBounds(805, 577, 235, 20);
+		
+		tf1.setBounds(805, 497, 172, 20);
+		
+		ta1.setBounds(805, 267, 235, 200);
+		
 		add(plImg1);
+		add(plBtn1);
+		add(plBtn2);
+		add(plBtn3);
+		add(plBtn4);
+		add(plBtn5);
+		add(plBtn6);
+		add(tf1);
+		add(ta1);
 	}
 	
 	private void uI1_listener() {
