@@ -463,6 +463,7 @@ public class Ui6 extends JPanel{
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == 10 && sendChat.getText().length() > 0) {
 					MainFrame.clnt.sendChat(sendChat.getText());
+					new ChatSound(sendChat.getText());
 					//taChat.setText(taChat.getText()+"\n"+sendChat.getText());
 					sendChat.setText("");
 				}

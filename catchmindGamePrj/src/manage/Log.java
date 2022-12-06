@@ -1,8 +1,5 @@
 package manage;
 
-import UI.Ui1;
-import UI.UiTool;
-
 public class Log {
 	/*
 	 * ------------------------

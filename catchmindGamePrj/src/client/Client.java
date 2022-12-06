@@ -3,11 +3,7 @@ package client;
 import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.LinkedList;
 
-import javax.swing.*;
-
-import UI.Ui6;
 import server.GameServer;
 
 public class Client {
@@ -18,7 +14,6 @@ public class Client {
 	public static Socket socket;
 	public static PrintWriter writer;
 	public static BufferedReader reader;
-	//public static ClientInfo cInfo;
 	
 	public void connectServer() {
 		try {

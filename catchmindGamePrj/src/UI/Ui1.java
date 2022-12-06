@@ -4,7 +4,10 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import gameSound.GameSound;
+
 public class Ui1 extends JPanel{
+	private GameSound sound;
 	private UiTool uiTool;
 	private JLabel plId1; //text
 	private JButton plBtn1; //button
@@ -14,6 +17,8 @@ public class Ui1 extends JPanel{
 	private JLabel plImg2;
 	
 	public Ui1() {
+		sound = new GameSound("bgm/bg1.wav");
+		
 		uiTool = new UiTool();
 		setLayout(null);
 		uI1_DesignLayout();
@@ -53,6 +58,7 @@ public class Ui1 extends JPanel{
 		plBtn1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				sound.playEffect("bgm/effect_turn.wav");
 				uiTool.setUI(Ui1.this, new Ui2());
 			}
 		});

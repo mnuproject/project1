@@ -13,7 +13,7 @@ public class GameSound {
 		}
 	}
 	
-	public void playBg(String bgPath) {
+	private void playBg(String bgPath) {
 		try {
 			bgClip = AudioSystem.getClip();
 			bgClip.open(AudioSystem.getAudioInputStream(new File(bgPath)));

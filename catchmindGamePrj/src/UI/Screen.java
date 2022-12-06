@@ -105,7 +105,7 @@ public class Screen extends Canvas implements MouseMotionListener, ComponentList
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		String xy = String.format("%d,%d", e.getPoint().x, e.getPoint().y);
-		MainFrame.clnt.sendDraw(String.format("%d,%d", e.getPoint().x, e.getPoint().y));
+		//MainFrame.clnt.sendDraw(String.format("%d,%d", e.getPoint().x, e.getPoint().y));
 		
 		if (modeEraser == false) {
 			mousePointList.add(e.getPoint());
