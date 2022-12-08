@@ -154,13 +154,17 @@ public class ReaderThread extends Thread {
 		}
 	}
 	
-	private void readUi7(String[] parsReaderMsg) {
-		if (parsReaderMsg[0].equals("ITEM4")) {
-			System.out.println(TAG + "item4");
-			new TimerTh().start();
-			Ui6.playTitle.setText("제시어 : 오버워치");
-			Ui6.playTitle.setFont(new Font("맑은고딕", Font.BOLD, 16));
-			Ui6.taChat.setText(Ui6.taChat.getText()+"\n"+parsReaderMsg[1]);
+	private void readIDS(String[] parsReaderMsg) {
+		if (parsReaderMsg[0].equals("IDS")) {
+			System.out.println(TAG + "IDS");
+			System.out.println(TAG + parsReaderMsg[1]);
+		}
+	}
+	
+	private void readScoreList(String[] parsReaderMsg) {
+		if (parsReaderMsg[0].equals("SCORELIST")) {
+			System.out.println(TAG + "SCORELIST");
+			System.out.println(TAG + parsReaderMsg[1]);
 		}
 	}
 }
