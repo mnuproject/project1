@@ -12,7 +12,7 @@ public class GameServer {
 	private ServerSocket serverSocket; // 서버 소켓.
 	private Socket socket; // 클라이언트가 접속하면 새로 만드는 소켓.	
 	
-	public static String ip = "localhost";
+	public static String ip = "192.168.1.148";
 	public static int PortNum = 3000;
 	
 	// 생성자에서 클라이언트의 접속을 대기한다 (메인 스레드)

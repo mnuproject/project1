@@ -30,7 +30,7 @@ public class ClientInfo extends Thread {
 				parsReaderMsg = readerMsg.split("&");
 				
 				// Client Thread에서 동작하는 프로토콜.
-				clientIDS(parsReaderMsg);
+				//clientIDS(parsReaderMsg);
 				protocolColor(parsReaderMsg);
 				protocolDraw(parsReaderMsg);
 				protocolEraser(parsReaderMsg);
