@@ -151,7 +151,7 @@ public class ClientInfo extends Thread {
 		System.out.println(TAG + "PROTOCOL sendIDs");
 		String IDstr = "";
 		for (int i=0; i<4; i++) {
-			IDstr += clientIDS[i]+"\t";
+			IDstr += clientIDS[i]+"&";
 		}
 		
 		for (int i = 0; i < GameServer.vcClient.size(); i++) {
@@ -163,7 +163,7 @@ public class ClientInfo extends Thread {
 		System.out.println(TAG + "PROTOCOL sendScoreList");
 		String scoreStr = "";
 		for (int i=0; i<4; i++) {
-			scoreStr += String.valueOf(scoreList[i])+"\t";
+			scoreStr += String.valueOf(scoreList[i])+"&";
 		}
 		
 		for (int i = 0; i < GameServer.vcClient.size(); i++) {
@@ -172,10 +172,10 @@ public class ClientInfo extends Thread {
 	}
 	
 	private void protocolSendReadyList() {
-		System.out.println(TAG + "PROTOCOL sendScoreList");
+		System.out.println(TAG + "PROTOCOL sendReadyList");
 		String scoreStr = "";
 		for (int i=0; i<4; i++) {
-			scoreStr += String.valueOf(scoreList[i])+"\t";
+			scoreStr += String.valueOf(scoreList[i])+"&";
 		}
 		
 		for (int i = 0; i < GameServer.vcClient.size(); i++) {
