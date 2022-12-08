@@ -2,16 +2,18 @@ package server;
 
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.LinkedList;
 import java.util.Vector;
 
 public class GameServer {
 	private final String TAG = "GameServer : ";
-	public static GameServer gameServer;
 	public static Vector<ClientInfo> vcClient; // 클라이언트의 정보를 담는 벡터.
-	public static ServerSocket serverSocket; // 서버 소켓.
+	private static GameServer gameServer;
+	private ServerSocket serverSocket; // 서버 소켓.
+	private Socket socket; // 클라이언트가 접속하면 새로 만드는 소켓.	
+	
 	public static String ip = "localhost";
 	public static int PortNum = 3000;
-	private Socket socket; // 클라이언트가 접속하면 새로 만드는 소켓.	
 	
 	// 생성자에서 클라이언트의 접속을 대기한다 (메인 스레드)
 	private GameServer() {
@@ -30,7 +32,7 @@ public class GameServer {
 			}
 
 		} catch (Exception e) {
-			System.out.println(TAG + "server");
+			System.out.println(TAG + "server error");
 		}
 	}
 	

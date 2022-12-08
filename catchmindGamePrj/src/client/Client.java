@@ -4,10 +4,15 @@ import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import javax.swing.JOptionPane;
+
+import UI.Ui6;
+import server.ClientInfo;
 import server.GameServer;
 
 public class Client {
 	private String TAG = "Client : ";
+	private static String clientID = "user";
 	public static boolean isReady = false;
 	
 	//socket
@@ -25,34 +30,22 @@ public class Client {
 		}
 	}
 	
-	public void sendInsertId(String idText) {		
+	public void sendId(String idText) {		
 		try {
 			writer = new PrintWriter(socket.getOutputStream(), true);
-			if ((idText.equals(""))) { // NULL값 입력시
-				writer.println("ID&" + "emptyID");
-			} else { // 아이디 값 입력시.
-				writer.println("ID&" + idText);
+			
+			/*for (int i=0; i<ClientInfo.clientIDS.size(); i++) {
+				if (ClientInfo.clientIDS.get(i) != null) {
+					
+				}
+			}*/
+			if (idText != null) {
+				clientID = idText;
+				System.out.println(clientID);
 			}
+			writer.println("ID&" + clientID);
 		} catch (Exception e) {
 			System.out.println(TAG + "Id Msg fail...");
-		}
-	}
-	
-	public void sendReady(String idText) {
-		try {
-			writer = new PrintWriter(socket.getOutputStream(), true);
-			writer.println("READY&" + idText);
-		} catch (Exception e) {
-			System.out.println(TAG + "Ready Msg send fail...");
-		}
-	}
-	
-	public void sendChat(String chatText) {
-		try {
-			writer = new PrintWriter(socket.getOutputStream(), true);
-			writer.println("CHAT&" + chatText);
-		} catch (Exception e) {
-			System.out.println(TAG + "Chat Msg fail...");
 		}
 	}
 	
@@ -65,46 +58,82 @@ public class Client {
 		}
 	}
 	
-	public void sendDraw(String drawText) {		
+	public void sendDraw(String xyText) {		
 		try {
 			writer = new PrintWriter(socket.getOutputStream(), true);
-			writer.println("DRAW&" + drawText);
+			writer.println("DRAW&" + xyText);
 		} catch (Exception e) {
 			System.out.println(TAG + "Draw Msg fail...");
 		}
-	}
+	}	
 	
-	public void sendItem1(String itemText) {
+	public void sendEraser(String xyText) {		
 		try {
 			writer = new PrintWriter(socket.getOutputStream(), true);
-			writer.println("ITEM1&" + itemText);
+			writer.println("Eraser&" + xyText);
+		} catch (Exception e) {
+			System.out.println(TAG + "Eraser Msg fail...");
+		}
+	}
+	
+	public void sendChat(String chatText) {
+		try {
+			writer = new PrintWriter(socket.getOutputStream(), true);
+			writer.println("CHAT&" + clientID +"&" + chatText);
+		} catch (Exception e) {
+			System.out.println(TAG + "Chat Msg fail...");
+		}
+	}
+	
+	public void sendReady() {
+		try {
+			writer = new PrintWriter(socket.getOutputStream(), true);
+			writer.println("READY&" +clientID);
+		} catch (Exception e) {
+			System.out.println(TAG + "Ready Msg send fail...");
+		}
+	}
+	
+	public void sendPrepare() {
+		try {
+			writer = new PrintWriter(socket.getOutputStream(), true);
+			writer.println("PREPARE&" + clientID);
+		} catch (Exception e) {
+			System.out.println(TAG + "Ready Msg send fail...");
+		}
+	}
+	
+	public void sendItem1() {
+		try {
+			writer = new PrintWriter(socket.getOutputStream(), true);
+			writer.println("ITEM1&" + clientID);
 		} catch (Exception e) {
 			System.out.println(TAG + "item1 Msg fail...");
 		}
 	}
 	
-	public void sendItem2(String itemText) {
+	public void sendItem2() {
 		try {
 			writer = new PrintWriter(socket.getOutputStream(), true);
-			writer.println("ITEM2&" + itemText);
+			writer.println("ITEM2&" + clientID);
 		} catch (Exception e) {
 			System.out.println(TAG + "item2 Msg fail...");
 		}
 	}
 	
-	public void sendItem3(String itemText) {
+	public void sendItem3() {
 		try {
 			writer = new PrintWriter(socket.getOutputStream(), true);
-			writer.println("ITEM3&" + itemText);
+			writer.println("ITEM3&" + clientID);
 		} catch (Exception e) {
 			System.out.println(TAG + "item3 Msg fail...");
 		}
 	}
 	
-	public void sendItem4(String itemText) {
+	public void sendItem4() {
 		try {
 			writer = new PrintWriter(socket.getOutputStream(), true);
-			writer.println("ITEM4&" + itemText);
+			writer.println("ITEM4&" + clientID);
 		} catch (Exception e) {
 			System.out.println(TAG + "item4 Msg fail...");
 		}

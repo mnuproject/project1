@@ -4,28 +4,15 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import UI.*;
-import res.*;
+import java.util.LinkedList;
 
 public class ClientInfo extends Thread {
 	private final String TAG = "ClientInfo : ";
+	public static LinkedList<String> clientIDS;
 	private Socket socket; // 클라이언트 소켓을 받아서 사용하는 변수.
 	private PrintWriter writer; // 쓰기 버퍼.
 	private BufferedReader reader; // 읽기 버퍼.
-
-	public String clientId = "test"; // 클라이언트 아이디를 담는 변수.
 	
-	/*public boolean isStart = false; // 게임이 시작하면 동작하는 변수.
-	public boolean isEnd = false; // 게임 끝나면 동작하는 변수.
-	public boolean isRightAnswer = false; // 정답을 맞추면 동작하는 변수.
-	public int checkReady = 0; // 입장 인원 중 몇명이 준비 버튼을 눌렀는지 담는 변수.
-	public int userTurn = 0; // 접속하는 클라이언트 한테 턴을 부여해주는 변수.
-	public int selectTurn = 1; // 누가 턴인지 정하는 변수.
-	
-	// 제시어를 담아놓은 배열.
-	public int selectProblem = 0; // 어떤 제시어가 문제로 나왔는지 정하는 변수.
-	public int score = 0; // 정답을 맞추면 올라가는 스코어 변수.*/
-
 	// 생성자에서 클라이언트 소켓을 내부 클래스 소켓에 담는다.
 	public ClientInfo(Socket socket) {
 		this.socket = socket;
@@ -43,9 +30,15 @@ public class ClientInfo extends Thread {
 				parsReaderMsg = readerMsg.split("&");
 				
 				// Client Thread에서 동작하는 프로토콜.
+				clientIDS(parsReaderMsg);
 				protocolColor(parsReaderMsg);
 				protocolDraw(parsReaderMsg);
+				protocolEraser(parsReaderMsg);
 				protocolChat(parsReaderMsg);
+				protocolItem1(parsReaderMsg);
+				protocolItem2(parsReaderMsg);
+				protocolItem3(parsReaderMsg);
+				protocolItem4(parsReaderMsg);
 				
 				/*protocolID(parsReaderMsg);
 				protocolChat(parsReaderMsg);
@@ -62,14 +55,21 @@ public class ClientInfo extends Thread {
 		}
 	} // end of run
 
-	public void TestInfo(String text) {
+	private void TestInfo(String text) {
 		System.out.println(TAG + "message testInfo");
 		for (int i = 0; i < GameServer.vcClient.size(); i++) {
 			GameServer.vcClient.get(i).writer.println("client " + text+"\n");
 		}
 	}
 	
-	public void protocolColor(String[] parsReaderMsg) {
+	private void clientIDS(String[] parsReaderMsg) {
+		if (parsReaderMsg[0].equals("ID")) {
+			System.out.println(TAG + "client ID");
+			clientIDS.add(parsReaderMsg[1]);
+		}
+	}
+	
+	private void protocolColor(String[] parsReaderMsg) {
 		if (parsReaderMsg[0].equals("COLOR")) {
 			System.out.println(TAG + "PROTOCOL change color");
 			for(int i = 0; i < GameServer.vcClient.size(); i++) {
@@ -78,20 +78,65 @@ public class ClientInfo extends Thread {
 		}
 	}
 	
-	public void protocolDraw(String[] parsReaderMsg) {
+	private void protocolDraw(String[] parsReaderMsg) {
 		if (parsReaderMsg[0].equals("DRAW")) {
-			//System.out.println(TAG + "PROTOCOL Draw xy");
+			System.out.println(TAG + "PROTOCOL Draw");
 			for(int i = 0; i < GameServer.vcClient.size(); i++) {
 				GameServer.vcClient.get(i).writer.println("DRAW&"+parsReaderMsg[1]);
 			}
 		}
+	}	
+	
+	private void protocolEraser(String[] parsReaderMsg) {
+		if (parsReaderMsg[0].equals("Eraser")) {
+			System.out.println(TAG + "PROTOCOL Eraser");
+			for(int i = 0; i < GameServer.vcClient.size(); i++) {
+				GameServer.vcClient.get(i).writer.println("Eraser&"+parsReaderMsg[1]);
+			}
+		}
 	}
 
-	public void protocolChat(String[] parsReaderMsg) {
+	private void protocolChat(String[] parsReaderMsg) {
 		if (parsReaderMsg[0].equals("CHAT") && parsReaderMsg.length > 0) {
-			System.out.println(TAG + "PROTOCOL chat");
+			System.out.println(TAG + "PROTOCOL Chat");
 			for (int i = 0; i < GameServer.vcClient.size(); i++) {
-				GameServer.vcClient.get(i).writer.println("CHAT&[" + clientId + "]: " + parsReaderMsg[1]);
+				GameServer.vcClient.get(i).writer.println("CHAT&[" + parsReaderMsg[1] + "]: " + parsReaderMsg[2]);
+			}
+		}
+	}
+	
+	private void protocolItem1(String[] parsReaderMsg) {
+		if (parsReaderMsg[0].equals("ITEM1")) {
+			System.out.println(TAG + "PROTOCOL item1");
+			for (int i = 0; i < GameServer.vcClient.size(); i++) {
+				GameServer.vcClient.get(i).writer.println("ITEM1&" + parsReaderMsg[1]);
+			}
+		}
+	}
+	
+	private void protocolItem2(String[] parsReaderMsg) {
+		if (parsReaderMsg[0].equals("ITEM2")) {
+			System.out.println(TAG + "PROTOCOL item2");
+			for (int i = 0; i < GameServer.vcClient.size(); i++) {
+				GameServer.vcClient.get(i).writer.println("ITEM2&" + parsReaderMsg[1]);
+			}
+		}
+	}
+	
+	private void protocolItem3(String[] parsReaderMsg) {
+		if (parsReaderMsg[0].equals("ITEM3")) {
+			System.out.println(TAG + "PROTOCOL item3");
+			for (int i = 0; i < GameServer.vcClient.size(); i++) {
+				GameServer.vcClient.get(i).writer.println("ITEM3&" + parsReaderMsg[1]);
+			}
+		}
+	}
+	
+	private void protocolItem4(String[] parsReaderMsg) {
+		if (parsReaderMsg[0].equals("ITEM4")) {
+			System.out.println(TAG + "PROTOCOL item4");
+			for (int i = 0; i < GameServer.vcClient.size(); i++) {
+				GameServer.vcClient.get(i).writer.println("ITEM4&" + parsReaderMsg[1]);
 			}
 		}
 	}

@@ -37,6 +37,4 @@ public class UiTool {
 	public void setUI(JPanel rmPanel, JPanel panel) {
 		MainFrame.getMainFrame().setUI(rmPanel, panel);
 	}
-	
-	
 }

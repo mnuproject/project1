@@ -5,10 +5,9 @@ import java.awt.event.*;
 import java.util.*;
 
 public class Screen extends Canvas implements MouseMotionListener, ComponentListener{
-	public static Screen screen;
+	private static Screen screen;
 	public static LinkedList<Point> mousePointList = new LinkedList<>();
 	public static LinkedList<Color> mouseColorList = new LinkedList<>();
-	public static boolean isDrawing = false;
 	private boolean modeEraser = false;
 	private Color color;
 	
@@ -42,36 +41,20 @@ public class Screen extends Canvas implements MouseMotionListener, ComponentList
 	}
 	
 	@Override
-	public void paint(Graphics g) {
+	public synchronized void paint(Graphics g) {
 		try {
 			bufferGraphics.clearRect(0, 0, 650, 520);
 			bufferGraphics.setColor(Color.WHITE);
 			bufferGraphics.fillRect(0, 0, 650, 520);
 			
-			int siz = mousePointList.size();
-			for (int i=0; i<siz-1; i++){
-				//System.out.println(String.format("%d/%d | ori : %d", i, mousePointList.size(), siz));
-				//Thread.sleep(300);
-				
+			for (int i=0; i<mousePointList.size(); i++){
 				Point point = mousePointList.get(i);
 				bufferGraphics.setColor(mouseColorList.get(i));
 				bufferGraphics.fillOval(point.x, point.y, 10, 10);
 			}
 			
 			g.drawImage(offScreen, 0, 0, null);
-		} catch (Exception e) {
-			e.printStackTrace();
-			
-			try {
-				System.out.println("인덱스 오류");
-				Thread.sleep(100000);
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-			//System.out.println("out index error ");
-		}
+		} catch (Exception e) {}
 	}
 
 	@Override
@@ -92,7 +75,7 @@ public class Screen extends Canvas implements MouseMotionListener, ComponentList
 	public void setEraser() {
 		this.modeEraser = true;
 	}
-	
+
 	public void addPoint(Point point) {
 		this.modeEraser = false;
 		mousePointList.add(point);
@@ -102,25 +85,24 @@ public class Screen extends Canvas implements MouseMotionListener, ComponentList
 		mouseColorList.add(color);
 	}
 	
+	public void eraser(Point EarserPoint) {
+		for (int i=0; i<mousePointList.size(); i++) {
+			Point point = mousePointList.get(i);	
+			if ((EarserPoint.x > point.x-20 && EarserPoint.x < point.x+20) && (EarserPoint.y > point.y-20 && EarserPoint.y < point.y+20)) {
+				mousePointList.remove(i);
+				mouseColorList.remove(i);
+			}
+		}
+	}
+	
 	@Override
-	public void mouseDragged(MouseEvent e) {
-		String xy = String.format("%d,%d", e.getPoint().x, e.getPoint().y);
-		//MainFrame.clnt.sendDraw(String.format("%d,%d", e.getPoint().x, e.getPoint().y));
-		
+	public void mouseDragged(MouseEvent e) {		
 		if (modeEraser == false) {
-			mousePointList.add(e.getPoint());
-			mouseColorList.add(color);
+			MainFrame.clnt.sendDraw(String.format("%d,%d", e.getPoint().x, e.getPoint().y));
+			MainFrame.clnt.sendColor(getColor(color));
 		}
 		else if (modeEraser == true) {
-			for (int i=0; i<mousePointList.size(); i++) {
-				Point point = mousePointList.get(i);
-				Point gPoint = e.getPoint();
-				
-				if ((gPoint.x > point.x-20 && gPoint.x < point.x+20) && (gPoint.y > point.y-20 && gPoint.y < point.y+20)) {
-					mousePointList.remove(i);
-					mouseColorList.remove(i);
-				}
-			}
+			MainFrame.clnt.sendEraser(String.format("%d,%d", e.getPoint().x, e.getPoint().y));
 		}
 	}
 	
@@ -147,5 +129,33 @@ public class Screen extends Canvas implements MouseMotionListener, ComponentList
 	@Override
 	public void componentHidden(ComponentEvent e) {
 		
+	}
+	
+	private String getColor(Color color) {
+		if (color == Color.BLACK) {
+			return "Black";
+		}
+		else if (color == Color.RED) {
+			return "Red";
+		}
+		else if (color == Color.ORANGE) {
+			return "Orange";
+		}
+		else if (color == Color.YELLOW) {
+			return "Yellow";
+		}
+		else if (color == Color.GREEN) {
+			return "Green";
+		}
+		else if (color == Color.CYAN) {
+			return "Cyan";
+		}
+		else if (color == Color.BLUE) {
+			return "Blue";
+		}
+		else if (color == Color.MAGENTA) {
+			return "Purple";
+		}
+		return null;
 	}
 }

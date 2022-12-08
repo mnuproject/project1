@@ -13,7 +13,7 @@ public class Ui4 extends JPanel{
 	private JButton plBtn5;
 	private JButton plBtn6;
 	private JLabel plImg1;
-	TextArea ta1 = new TextArea("text area");	
+	public static TextArea ta1 = new TextArea("text area");	
 	TextField tf1 = new TextField("text field");
 	
 	
@@ -70,10 +70,10 @@ public class Ui4 extends JPanel{
 	}
 	
 	private void uI1_listener() {
-		plBtn1.addActionListener(new ActionListener() {
+		plBtn4.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("버튼 클릭");
+				MainFrame.clnt.sendChat(tf1.getText());
 			}
 		});
 	}

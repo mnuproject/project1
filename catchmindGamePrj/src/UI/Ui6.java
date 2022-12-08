@@ -2,9 +2,6 @@ package UI;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
-import java.net.Socket;
-
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
@@ -42,6 +39,7 @@ public class Ui6 extends JPanel{
 	private Screen screen;
 	
 	//draw
+	private JPanel colorPallet;
 	private JButton btnBlackDrawPen;
 	private JButton btnRedDrawPen;
 	private JButton btnOrangeDrawPen;
@@ -271,76 +269,83 @@ public class Ui6 extends JPanel{
 		timeProgress.setBounds(200, 0, 650, 30);
 		add(timeProgress);
 		
-		//drawPen		
+		//drawPen
+		colorPallet = new JPanel();
+		colorPallet.setLayout(null);
+		colorPallet.setBounds(190, 570, 690, 140);
+		colorPallet.setBackground(new Color(239, 228, 176));
+
 		btnBlackDrawPen = new JButton();
 		btnBlackDrawPen.setIcon(uiTool.getImg("img/drawBlackPen.png", 60, 140));
-		btnBlackDrawPen.setBounds(190, 570, 60, 140);
+		btnBlackDrawPen.setBounds(0, 0, 60, 140);
 		btnBlackDrawPen.setBackground(new Color(239, 228, 176));
 		btnBlackDrawPen.setBorderPainted(false);
-		add(btnBlackDrawPen);
+		colorPallet.add(btnBlackDrawPen);
 		
 		btnRedDrawPen = new JButton();
 		btnRedDrawPen.setIcon(uiTool.getImg("img/drawRedPen.png", 60, 140));
-		btnRedDrawPen.setBounds(250, 570, 60, 140);
+		btnRedDrawPen.setBounds(60, 0, 60, 140);
 		btnRedDrawPen.setBackground(new Color(239, 228, 176));
 		btnRedDrawPen.setBorderPainted(false);
-		add(btnRedDrawPen);
+		colorPallet.add(btnRedDrawPen);
 		
 		btnOrangeDrawPen = new JButton();
 		btnOrangeDrawPen.setIcon(uiTool.getImg("img/drawOrangePen.png", 60, 140));
-		btnOrangeDrawPen.setBounds(310, 570, 60, 140);
+		btnOrangeDrawPen.setBounds(120, 0, 60, 140);
 		btnOrangeDrawPen.setBackground(new Color(239, 228, 176));
 		btnOrangeDrawPen.setBorderPainted(false);
-		add(btnOrangeDrawPen);
+		colorPallet.add(btnOrangeDrawPen);
 		
 		btnYellowDrawPen = new JButton();
 		btnYellowDrawPen.setIcon(uiTool.getImg("img/drawYellowPen.png", 60, 140));
-		btnYellowDrawPen.setBounds(370, 570, 60, 140);
+		btnYellowDrawPen.setBounds(180, 0, 60, 140);
 		btnYellowDrawPen.setBackground(new Color(239, 228, 176));
 		btnYellowDrawPen.setBorderPainted(false);
-		add(btnYellowDrawPen);
+		colorPallet.add(btnYellowDrawPen);
 		
 		btnGreenDrawPen = new JButton();
 		btnGreenDrawPen.setIcon(uiTool.getImg("img/drawGreenPen.png", 60, 140));
-		btnGreenDrawPen.setBounds(430, 570, 60, 140);
+		btnGreenDrawPen.setBounds(240, 0, 60, 140);
 		btnGreenDrawPen.setBackground(new Color(239, 228, 176));
 		btnGreenDrawPen.setBorderPainted(false);
-		add(btnGreenDrawPen);
+		colorPallet.add(btnGreenDrawPen);
 		
 		btnBlueDrawPen = new JButton();
 		btnBlueDrawPen.setIcon(uiTool.getImg("img/drawBluePen.png", 60, 140));
-		btnBlueDrawPen.setBounds(490, 570, 60, 140);
+		btnBlueDrawPen.setBounds(300, 0, 60, 140);
 		btnBlueDrawPen.setBackground(new Color(239, 228, 176));
 		btnBlueDrawPen.setBorderPainted(false);
-		add(btnBlueDrawPen);
+		colorPallet.add(btnBlueDrawPen);
 		
 		btnIndigoDrawPen = new JButton();
 		btnIndigoDrawPen.setIcon(uiTool.getImg("img/drawIndigoPen.png", 60, 140));
-		btnIndigoDrawPen.setBounds(550, 570, 60, 140);
+		btnIndigoDrawPen.setBounds(360, 0, 60, 140);
 		btnIndigoDrawPen.setBackground(new Color(239, 228, 176));
 		btnIndigoDrawPen.setBorderPainted(false);
-		add(btnIndigoDrawPen);
+		colorPallet.add(btnIndigoDrawPen);
 		
 		btnPurpleDrawPen = new JButton();
 		btnPurpleDrawPen.setIcon(uiTool.getImg("img/drawPurplePen.png", 60, 140));
-		btnPurpleDrawPen.setBounds(610, 570, 60, 140);
+		btnPurpleDrawPen.setBounds(420, 0, 60, 140);
 		btnPurpleDrawPen.setBackground(new Color(239, 228, 176));
 		btnPurpleDrawPen.setBorderPainted(false);
-		add(btnPurpleDrawPen);
+		colorPallet.add(btnPurpleDrawPen);
 		
 		btnEraser = new JButton();
 		btnEraser.setIcon(uiTool.getImg("img/drawEraser.png", 80, 120));
-		btnEraser.setBounds(670, 580, 80, 120);
+		btnEraser.setBounds(480, 10, 80, 120);
 		btnEraser.setBackground(new Color(239, 228, 176));
 		btnEraser.setBorderPainted(false);
-		add(btnEraser);
+		colorPallet.add(btnEraser);
 
 		btnAllDelete = new JButton();
 		btnAllDelete.setIcon(uiTool.getImg("img/allDelete.png", 90, 120));
-		btnAllDelete.setBounds(760, 580, 90, 120);
+		btnAllDelete.setBounds(560, 10, 90, 120);
 		btnAllDelete.setBackground(new Color(239, 228, 176));
 		btnAllDelete.setBorderPainted(false);
-		add(btnAllDelete);
+		colorPallet.add(btnAllDelete);
+		
+		add(colorPallet);
 		
 		//screen
 		screen = Screen.getScreen();
@@ -355,7 +360,6 @@ public class Ui6 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				taChat.setText(taChat.getText()+"\n"+"black pen");
-				MainFrame.clnt.sendColor("Black");
 				screen.setColor(Color.BLACK);
 			}
 		});
@@ -364,7 +368,6 @@ public class Ui6 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				taChat.setText(taChat.getText()+"\n"+"red pen");
-				MainFrame.clnt.sendColor("Red");
 				screen.setColor(Color.RED);
 			}
 		});
@@ -373,7 +376,6 @@ public class Ui6 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				taChat.setText(taChat.getText()+"\n"+"orange pen");
-				MainFrame.clnt.sendColor("Orange");
 				screen.setColor(Color.ORANGE);
 			}
 		});
@@ -382,7 +384,6 @@ public class Ui6 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				taChat.setText(taChat.getText()+"\n"+"yellow pen");
-				MainFrame.clnt.sendColor("Yellow");
 				screen.setColor(Color.YELLOW);
 			}
 		});
@@ -391,7 +392,6 @@ public class Ui6 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				taChat.setText(taChat.getText()+"\n"+"green pen");
-				MainFrame.clnt.sendColor("Green");
 				screen.setColor(Color.GREEN);
 			}
 		});
@@ -400,7 +400,6 @@ public class Ui6 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				taChat.setText(taChat.getText()+"\n"+"cyan pen");
-				MainFrame.clnt.sendColor("Cyan");
 				screen.setColor(Color.CYAN);
 			}
 		});
@@ -409,7 +408,6 @@ public class Ui6 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				taChat.setText(taChat.getText()+"\n"+"blue pen");
-				MainFrame.clnt.sendColor("Blue");
 				screen.setColor(Color.BLUE);
 			}
 		});
@@ -418,7 +416,6 @@ public class Ui6 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				taChat.setText(taChat.getText()+"\n"+"purple pen");
-				MainFrame.clnt.sendColor("Purple");
 				screen.setColor(Color.MAGENTA);
 			}
 		});
@@ -463,7 +460,6 @@ public class Ui6 extends JPanel{
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == 10 && sendChat.getText().length() > 0) {
 					MainFrame.clnt.sendChat(sendChat.getText());
-					new ChatSound(sendChat.getText());
 					//taChat.setText(taChat.getText()+"\n"+sendChat.getText());
 					sendChat.setText("");
 				}
@@ -479,38 +475,28 @@ public class Ui6 extends JPanel{
 		btnItem1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainFrame.clnt.sendItem1("item1");
-				taChat.setText(taChat.getText()+"\n"+"item1");
-				playTitle.setFont(uiTool.ftSmall());
-				playTitle.setText("제시어 : 동물");
-				new TimerTh().start();
+				MainFrame.clnt.sendItem1();
 			}
 		});	
 		
 		btnItem2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				taChat.setText(taChat.getText()+"\n"+"item2");
-				playTitle.setText("제시어 : 쿠키");
-				new TimerTh().start();
+				MainFrame.clnt.sendItem2();
 			}
 		});	
 		
 		btnItem3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				taChat.setText(taChat.getText()+"\n"+"item3");
-				playTitle.setText("제시어 : 귤");
-				new TimerTh().start();
+				MainFrame.clnt.sendItem3();
 			}
 		});	
 		
 		btnItem4.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				taChat.setText(taChat.getText()+"\n"+"item4");
-				playTitle.setText("제시어 : 오버워치");
-				new TimerTh().start();
+				MainFrame.clnt.sendItem4();
 			}
 		});	
 		
@@ -519,7 +505,7 @@ public class Ui6 extends JPanel{
 			public void actionPerformed(ActionEvent e) {	
 				Client.isReady = !Client.isReady;
 				if (Client.isReady) {
-					MainFrame.clnt.sendReady("-");
+					MainFrame.clnt.sendReady();
 					taChat.setText(taChat.getText()+"\n"+"ready");
 					idProfileReady1.setVisible(true);
 					idProfileReady2.setVisible(true);
@@ -530,6 +516,7 @@ public class Ui6 extends JPanel{
 					btnReady.setText("준비됨");
 				}
 				else if (!Client.isReady) {
+					MainFrame.clnt.sendPrepare();
 					soundEffect.stop();
 					idProfileReady1.setVisible(false);
 					idProfileReady2.setVisible(false);

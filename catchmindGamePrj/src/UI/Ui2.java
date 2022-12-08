@@ -46,8 +46,8 @@ public class Ui2 extends JPanel{
 		plBtn1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//protocol.add()
-				System.out.println(tfIdInput.getText());
+				MainFrame.clnt.sendId(tfIdInput.getText());
+				uiTool.setUI(Ui2.this, new Ui6());
 			}
 		});
 	}
