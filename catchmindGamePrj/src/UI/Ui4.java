@@ -13,7 +13,7 @@ public class Ui4 extends JPanel{
 	private JButton plBtn5;
 	private JButton plBtn6;
 	private JLabel plImg1;
-	public static TextArea ta1 = new TextArea("text area");	
+	TextArea ta1 = new TextArea("text area");	
 	TextField tf1 = new TextField("text field");
 	
 	
@@ -73,8 +73,33 @@ public class Ui4 extends JPanel{
 		plBtn4.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainFrame.clnt.sendChat(tf1.getText());
+				System.out.println("버튼 클릭");
+				ta1.setText(ta1.getText() + "\n" + tf1.getText());
 			}
 		});
+		
+		tf1.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == 10 && tf1.getText().length() > 0) {
+					MainFrame.clnt.sendChat(tf1.getText());
+					//taChat.setText(taChat.getText()+"\n"+sendChat.getText());
+					tf1.setText("");
+				}
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+	});
+	
 	}
 }
