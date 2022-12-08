@@ -153,4 +153,14 @@ public class ReaderThread extends Thread {
 			Ui6.taChat.setText(Ui6.taChat.getText()+"\n"+parsReaderMsg[1]);
 		}
 	}
+	
+	private void readUi7(String[] parsReaderMsg) {
+		if (parsReaderMsg[0].equals("ITEM4")) {
+			System.out.println(TAG + "item4");
+			new TimerTh().start();
+			Ui6.playTitle.setText("제시어 : 오버워치");
+			Ui6.playTitle.setFont(new Font("맑은고딕", Font.BOLD, 16));
+			Ui6.taChat.setText(Ui6.taChat.getText()+"\n"+parsReaderMsg[1]);
+		}
+	}
 }

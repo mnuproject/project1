@@ -12,8 +12,9 @@ import server.GameServer;
 
 public class Client {
 	private String TAG = "Client : ";
-	private static String clientID = "user";
+	public static String clientID = "user";
 	public static boolean isReady = false;
+	public static int score = 0;
 	
 	//socket
 	public static Socket socket;
@@ -34,11 +35,6 @@ public class Client {
 		try {
 			writer = new PrintWriter(socket.getOutputStream(), true);
 			
-			/*for (int i=0; i<ClientInfo.clientIDS.size(); i++) {
-				if (ClientInfo.clientIDS.get(i) != null) {
-					
-				}
-			}*/
 			if (idText != null) {
 				clientID = idText;
 				System.out.println(clientID);

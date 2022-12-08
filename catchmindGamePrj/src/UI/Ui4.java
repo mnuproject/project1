@@ -99,7 +99,14 @@ public class Ui4 extends JPanel{
 				// TODO Auto-generated method stub
 				
 			}
-	});
+		});
+		
+		plBtn5.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				uiTool.setUI(Ui4.this, new Ui5());
+			}
+		});
 	
 	}
 }
