@@ -22,7 +22,7 @@ public class Ui7 extends JPanel{
 		plId1.setBackground(new Color(255, 255, 255));
 		plId1.setBounds(0, 50, 400, 50);
 		
-		plBtn1 = new JButton("UI7 버튼생성 예시");
+		plBtn1 = new JButton("UI755555555 버튼생성 예시");
 		plBtn1.setBackground(new Color(255, 255, 255));
 		plBtn1.setBounds(0, 100, 100, 30);
 		
