@@ -13,7 +13,7 @@ public class Ui4 extends JPanel{
 	private JButton plBtn5;
 	private JButton plBtn6;
 	private JLabel plImg1;
-	TextArea ta1 = new TextArea("text area");	
+	public static TextArea ta1 = new TextArea("text area");	
 	TextField tf1 = new TextField("text field");
 	
 	
