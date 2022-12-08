@@ -92,10 +92,28 @@ public class Ui3 extends JPanel{
 	}
 	
 	private void uI1_listener() {
-		plBtn1.addActionListener(new ActionListener() {
+		plBtn5.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("버튼 클릭");
+				uiTool.setUI(Ui3.this, new Ui4());
+			}
+		});
+		plBtn6.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				uiTool.setUI(Ui3.this, new Ui4());
+			}
+		});
+		plBtn7.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				uiTool.setUI(Ui3.this, new Ui4());
+			}
+		});
+		plBtn8.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				uiTool.setUI(Ui3.this, new Ui4());
 			}
 		});
 	}
