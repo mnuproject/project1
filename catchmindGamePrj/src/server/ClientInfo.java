@@ -14,6 +14,13 @@ import client.Client;
 
 public class ClientInfo extends Thread {
 	private final String TAG = "ClientInfo : ";
+<<<<<<< HEAD
+=======
+	public static String[] clientIDS = {"", "", "", ""};
+	public static int[] scoreList = {0, 0, 0, 0};
+	public static boolean[] readyList = {false, false, false, false};
+	
+>>>>>>> branch 'main' of https://github.com/mnuproject/project1
 	private Socket socket; // 클라이언트 소켓을 받아서 사용하는 변수.
 	private PrintWriter writer; // 쓰기 버퍼.
 	private BufferedReader reader; // 읽기 버퍼.
@@ -172,6 +179,42 @@ public class ClientInfo extends Thread {
 			for (int i = 0; i < GameServer.vcClient.size(); i++) {
 				GameServer.vcClient.get(i).writer.println("ITEM4&" + parsReaderMsg[1]);
 			}
+		}
+	}
+	
+	private void protocolSendIDS() {
+		System.out.println(TAG + "PROTOCOL sendIDs");
+		String IDstr = "";
+		for (int i=0; i<4; i++) {
+			IDstr += clientIDS[i]+"&";
+		}
+		
+		for (int i = 0; i < GameServer.vcClient.size(); i++) {
+			GameServer.vcClient.get(i).writer.println("IDS&" + IDstr);
+		}
+	}
+	
+	private void protocolSendScoreList() {
+		System.out.println(TAG + "PROTOCOL sendScoreList");
+		String scoreStr = "";
+		for (int i=0; i<4; i++) {
+			scoreStr += String.valueOf(scoreList[i])+"&";
+		}
+		
+		for (int i = 0; i < GameServer.vcClient.size(); i++) {
+			GameServer.vcClient.get(i).writer.println("SCORELIST&" + scoreStr);
+		}
+	}
+	
+	private void protocolSendReadyList() {
+		System.out.println(TAG + "PROTOCOL sendReadyList");
+		String scoreStr = "";
+		for (int i=0; i<4; i++) {
+			scoreStr += String.valueOf(scoreList[i])+"&";
+		}
+		
+		for (int i = 0; i < GameServer.vcClient.size(); i++) {
+			GameServer.vcClient.get(i).writer.println("SCORELIST&" + scoreStr);
 		}
 	}
 } // end of class ClientInfo
