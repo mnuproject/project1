@@ -5,17 +5,23 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+
+import UI.MainFrame;
+import UI.Ui6;
 import client.Client;
 
 public class ClientInfo extends Thread {
 	private final String TAG = "ClientInfo : ";
-	public static String[] clientIDS = new String[4];
-	public static int[] scoreList = new int[4];
-	public static boolean[] readyList = new boolean[4];
-	
 	private Socket socket; // 클라이언트 소켓을 받아서 사용하는 변수.
 	private PrintWriter writer; // 쓰기 버퍼.
 	private BufferedReader reader; // 읽기 버퍼.
+
+	public String clientID = "user";
+	public boolean isReady = false;
+	public int score = 0;
+	public int turn = 0;
 	
 	// 생성자에서 클라이언트 소켓을 내부 클래스 소켓에 담는다.
 	public ClientInfo(Socket socket) {
@@ -27,16 +33,17 @@ public class ClientInfo extends Thread {
 		try {
 			reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			writer = new PrintWriter(socket.getOutputStream(), true);
+			
 			String readerMsg = null;
 			String[] parsReaderMsg;
 			
 			while ((readerMsg = reader.readLine()) != null) {
 				parsReaderMsg = readerMsg.split("&");
 				
-				// Client Thread에서 동작하는 프로토콜.
-				clientIDS();
-				clientScores();
-				clientReady();
+				// Client Thread에서 동작하는 프로토콜.				
+				protocolID(parsReaderMsg);
+				protocolReady(parsReaderMsg);
+				protocol_IDTotalList(parsReaderMsg);
 				
 				protocolColor(parsReaderMsg);
 				protocolDraw(parsReaderMsg);
@@ -51,25 +58,48 @@ public class ClientInfo extends Thread {
 			System.out.println(TAG + "message fail");
 		}
 	} // end of run
-
-	private void clientIDS() {
-		System.out.println(TAG + "client ID");
-		for (int i = 0; i < GameServer.vcClient.size(); i++) {
-			clientIDS[i] = Client.clientID;
+	
+	private void protocolID(String[] parsReaderMsg) {
+		if (parsReaderMsg[0].equals("ID")) {
+			this.clientID = parsReaderMsg[1];
+			for (int i = 0; i < GameServer.vcClient.size(); i++) {
+				GameServer.vcClient.get(i).writer.println("CHAT&[" + clientID + "] is enter the room.");
+				GameServer.vcClient.get(i).score = 0;
+			}
 		}
 	}
-
-	private void clientScores() {
-		System.out.println(TAG + "client Score");
-		for (int i = 0; i < GameServer.vcClient.size(); i++) {
-			scoreList[i] = Client.score;
+	
+	private void protocol_IDTotalList(String[] parsReaderMsg) {
+		if (parsReaderMsg[0].equals("IDTotalLIST")) {
+			for (int i = 0; i < GameServer.vcClient.size(); i++) {
+				for (int j = 0; j < GameServer.vcClient.size(); j++) {
+					GameServer.vcClient.get(i).writer.println(
+							"IDTotalLIST" 
+							+ "&" + String.valueOf(j) 
+							+ "&" + GameServer.vcClient.get(j).clientID
+							+ "&" + String.valueOf(GameServer.vcClient.get(j).score)
+							+ "&" + String.valueOf(GameServer.vcClient.get(j).isReady));
+				}
+			}
 		}
 	}
-
-	private void clientReady() {
-		System.out.println(TAG + "client Ready");
-		for (int i = 0; i < GameServer.vcClient.size(); i++) {
-			readyList[i] = Client.isReady;
+	
+	private void protocolReady(String[] parsReaderMsg) {
+		if (parsReaderMsg[0].equals("READY")) {
+			if (parsReaderMsg[2].equals("true")) {				
+				for (int i = 0; i < GameServer.vcClient.size(); i++) {
+					if (GameServer.vcClient.get(i).clientID.equals(parsReaderMsg[1])) {
+						GameServer.vcClient.get(i).isReady = true;
+					}
+				}
+			}
+			else if (parsReaderMsg[2].equals("false")) {
+				for (int i = 0; i < GameServer.vcClient.size(); i++) {
+					if (GameServer.vcClient.get(i).clientID.equals(parsReaderMsg[1])) {
+						GameServer.vcClient.get(i).isReady = false;
+					}
+				}
+			}
 		}
 	}
 	

@@ -1,4 +1,3 @@
-// 최종본
 package client;
 
 import javax.swing.*;

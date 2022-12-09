@@ -7,6 +7,8 @@ import javax.swing.border.LineBorder;
 
 import client.*;
 import item.*;
+import server.ClientInfo;
+import server.GameServer;
 import gameSound.GameSound;
 
 public class Ui6 extends JPanel{
@@ -18,22 +20,29 @@ public class Ui6 extends JPanel{
 	public static JLabel playTurn;
 	
 	//profile
+	public static JPanel IdProfile1;
 	public static JLabel idProfileID1;
 	public static JLabel idProfileScore1;
 	public static JLabel idProfileReady1;
+	
+	public static JPanel IdProfile2;
 	public static JLabel idProfileID2;
 	public static JLabel idProfileScore2;
 	public static JLabel idProfileReady2;
+	
+	public static JPanel IdProfile3;
 	public static JLabel idProfileID3;
 	public static JLabel idProfileScore3;
 	public static JLabel idProfileReady3;
+	
+	public static JPanel IdProfile4;
 	public static JLabel idProfileID4;
 	public static JLabel idProfileScore4;
 	public static JLabel idProfileReady4;
 	
 	//time
 	public static JProgressBar timeProgress;
-	public static int timeValue = 30;
+	public static int timeValue = 100;
 	
 	//screen
 	private Screen screen;
@@ -58,14 +67,21 @@ public class Ui6 extends JPanel{
 	public static JButton btnSendChat;
 	
 	//item
-	public static JButton btnItem1;
-	public static JLabel numItem1;
+	private JButton btnItem1;
+	private JLabel nItemTx1;
+	private int numItem1 = 0;
+	
 	public static JButton btnItem2;
-	public static JLabel numItem2;
+	public static JLabel nItemTx2;
+	private int numItem2 = 0;
+	
 	public static JButton btnItem3;
-	public static JLabel numItem3;
+	public static JLabel nItemTx3;
+	private int numItem3 = 0;
+	
 	public static JButton btnItem4;
-	public static JLabel numItem4;
+	public static JLabel nItemTx4;
+	private int numItem4 = 0;
 	
 	//ready
 	public static JButton btnReady;
@@ -74,11 +90,12 @@ public class Ui6 extends JPanel{
 	public Ui6() {
 		uiTool = new UiTool();
 		soundEffect = new GameSound("bgm/bg1.wav");
-
+		
 		setLayout(null);
 		setBackground(new Color(239, 228, 176));
 		uI6_DesignLayout();
 		uI6_listener();
+		MainFrame.clnt.send_IdTotalList();
 	}	
 	
 	private void uI6_DesignLayout() {
@@ -101,16 +118,16 @@ public class Ui6 extends JPanel{
 		playTurn.setBounds(0, 60, 100, 30);
 		titlePanel.add(playTitle);
 		titlePanel.add(playTurn);
-				
+		
 		//profile1
-		JPanel IdProfile1 = new JPanel();
+		IdProfile1 = new JPanel();
 		IdProfile1.setLayout(null);
-		IdProfile1.setBackground(new Color(93, 242, 250));
+		IdProfile1.setBackground(new Color(55, 227, 153));
 		IdProfile1.setBounds(0, 155, 190, 130);
-		idProfileID1 = new JLabel("아이디: A");
+		idProfileID1 = new JLabel("서버오류");
 		idProfileID1.setFont(uiTool.ftSmall());
 		idProfileID1.setBounds(0, 0, 100, 30);
-		idProfileScore1 = new JLabel("점수: 0");
+		idProfileScore1 = new JLabel("실행 후 접속");
 		idProfileScore1.setFont(uiTool.ftSmall());
 		idProfileScore1.setBounds(0, 50, 100, 30);
 		idProfileReady1 = new JLabel("준비됨");
@@ -121,15 +138,14 @@ public class Ui6 extends JPanel{
 		IdProfile1.add(idProfileScore1);
 		
 		//profile2
-		JPanel IdProfile2 = new JPanel();
+		IdProfile2 = new JPanel();
 		IdProfile2.setLayout(null);
-		IdProfile2.setBackground(new Color(110, 250, 50));
 		IdProfile2.setBounds(0, 290, 190, 130);
-		idProfileID2 = new JLabel("아이디: B");
+		idProfileID2 = new JLabel();
 		idProfileID2.setFont(uiTool.ftSmall());
 		idProfileID2.setBounds(0, 0, 100, 30);
 		IdProfile2.add(idProfileID2);
-		idProfileScore2 = new JLabel("점수: 0");
+		idProfileScore2 = new JLabel();
 		idProfileScore2.setFont(uiTool.ftSmall());
 		idProfileScore2.setBounds(0, 50, 100, 30);
 		idProfileReady2 = new JLabel("준비됨");
@@ -140,14 +156,13 @@ public class Ui6 extends JPanel{
 		IdProfile2.add(idProfileScore2);
 	
 		//profile3
-		JPanel IdProfile3 = new JPanel();
+		IdProfile3 = new JPanel();
 		IdProfile3.setLayout(null);
-		IdProfile3.setBackground(new Color(250, 160, 40));
 		IdProfile3.setBounds(0, 425, 190, 130);
-		idProfileID3 = new JLabel("아이디: C");
+		idProfileID3 = new JLabel();
 		idProfileID3.setFont(uiTool.ftSmall());
 		idProfileID3.setBounds(0, 0, 100, 30);
-		idProfileScore3 = new JLabel("점수: 0");
+		idProfileScore3 = new JLabel();
 		idProfileScore3.setFont(uiTool.ftSmall());
 		idProfileScore3.setBounds(0, 50, 100, 30);
 		idProfileReady3 = new JLabel("준비됨");
@@ -158,14 +173,13 @@ public class Ui6 extends JPanel{
 		IdProfile3.add(idProfileScore3);
 		
 		//profile4
-		JPanel IdProfile4 = new JPanel();
+		IdProfile4 = new JPanel();
 		IdProfile4.setLayout(null);
-		IdProfile4.setBackground(new Color(250, 250, 40));
 		IdProfile4.setBounds(0, 560, 190, 130);
-		idProfileID4 = new JLabel("아이디: D");
+		idProfileID4 = new JLabel();
 		idProfileID4.setFont(uiTool.ftSmall());
 		idProfileID4.setBounds(0, 0, 100, 30);
-		idProfileScore4 = new JLabel("점수: 0");
+		idProfileScore4 = new JLabel();
 		idProfileScore4.setFont(uiTool.ftSmall());
 		idProfileScore4.setBounds(0, 50, 100, 30);
 		idProfileReady4 = new JLabel("준비됨");
@@ -214,10 +228,11 @@ public class Ui6 extends JPanel{
 		btnItem1.setBorderPainted(false);
 		chatPanel.add(btnItem1);
 		
-		numItem1 = new JLabel("0");
-		numItem1.setBounds(40, 540, 50, 50);
-		numItem1.setFont(uiTool.ftSmall());
-		chatPanel.add(numItem1);
+		nItemTx1 = new JLabel("0");
+		nItemTx1.setBounds(40, 540, 60, 50);
+		nItemTx1.setFont(uiTool.ftSmall());
+		nItemTx1.setText(String.valueOf(numItem1));
+		chatPanel.add(nItemTx1);
 		
 		btnItem2 = new JButton();
 		btnItem2.setIcon(uiTool.getImg("img/item2.png", 50, 50));
@@ -226,10 +241,11 @@ public class Ui6 extends JPanel{
 		btnItem2.setBorderPainted(false);
 		chatPanel.add(btnItem2);
 		
-		numItem2 = new JLabel("0");
-		numItem2.setBounds(95, 540, 50, 50);
-		numItem2.setFont(uiTool.ftSmall());
-		chatPanel.add(numItem2);
+		nItemTx2 = new JLabel("0");
+		nItemTx2.setBounds(95, 540, 50, 50);
+		nItemTx2.setFont(uiTool.ftSmall());
+		nItemTx2.setText(String.valueOf(numItem2));
+		chatPanel.add(nItemTx2);
 		
 		btnItem3 = new JButton();
 		btnItem3.setIcon(uiTool.getImg("img/item3.png", 50, 50));
@@ -238,10 +254,11 @@ public class Ui6 extends JPanel{
 		btnItem3.setBorderPainted(false);
 		chatPanel.add(btnItem3);
 		
-		numItem3 = new JLabel("0");
-		numItem3.setBounds(150, 540, 50, 50);
-		numItem3.setFont(uiTool.ftSmall());
-		chatPanel.add(numItem3);
+		nItemTx3 = new JLabel("0");
+		nItemTx3.setBounds(150, 540, 50, 50);
+		nItemTx3.setFont(uiTool.ftSmall());
+		nItemTx3.setText(String.valueOf(numItem3));
+		chatPanel.add(nItemTx3);
 		
 		btnItem4 = new JButton();
 		btnItem4.setIcon(uiTool.getImg("img/item4.png", 50, 50));
@@ -250,10 +267,11 @@ public class Ui6 extends JPanel{
 		btnItem4.setBorderPainted(false);
 		chatPanel.add(btnItem4);
 		
-		numItem4 = new JLabel("0");
-		numItem4.setBounds(205, 540, 50, 50);
-		numItem4.setFont(uiTool.ftSmall());
-		chatPanel.add(numItem4);
+		nItemTx4 = new JLabel();
+		nItemTx4.setBounds(205, 540, 50, 50);
+		nItemTx4.setFont(uiTool.ftSmall());
+		nItemTx4.setText(String.valueOf(numItem4));
+		chatPanel.add(nItemTx4);
 		
 		btnReady = new JButton("준비");
 		btnReady.setFont(uiTool.ftMedium());
@@ -475,7 +493,7 @@ public class Ui6 extends JPanel{
 		btnItem1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainFrame.clnt.sendItem1();
+				MainFrame.clnt.sendItem2();
 			}
 		});	
 		
@@ -502,28 +520,17 @@ public class Ui6 extends JPanel{
 		
 		btnReady.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {	
-				Client.isReady = !Client.isReady;
+			public void actionPerformed(ActionEvent e) {
+				soundEffect.playEffect("bgm/effect_ring.wav");
+				MainFrame.clnt.sendReady();
+				MainFrame.clnt.send_IdTotalList();
 				if (Client.isReady) {
-					MainFrame.clnt.sendReady();
-					taChat.setText(taChat.getText()+"\n"+"ready");
-					idProfileReady1.setVisible(true);
-					idProfileReady2.setVisible(true);
-					idProfileReady3.setVisible(true);
-					idProfileReady4.setVisible(true);
-					btnReady.setBackground(new Color(239, 141, 228));
-					soundEffect.playEffect("bgm/effect_ring.wav");
 					btnReady.setText("준비됨");
+					btnReady.setBackground(new Color(230, 197, 230));
 				}
-				else if (!Client.isReady) {
-					MainFrame.clnt.sendPrepare();
-					soundEffect.stop();
-					idProfileReady1.setVisible(false);
-					idProfileReady2.setVisible(false);
-					idProfileReady3.setVisible(false);
-					idProfileReady4.setVisible(false);
-					btnReady.setBackground(new Color(220, 220, 220));
+				else {
 					btnReady.setText("준비");
+					btnReady.setBackground(new Color(220, 220, 220));
 				}
 			}
 		});	

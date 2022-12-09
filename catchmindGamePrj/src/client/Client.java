@@ -14,7 +14,6 @@ public class Client {
 	private String TAG = "Client : ";
 	public static String clientID = "user";
 	public static boolean isReady = false;
-	public static int score = 0;
 	
 	//socket
 	public static Socket socket;
@@ -36,12 +35,32 @@ public class Client {
 			writer = new PrintWriter(socket.getOutputStream(), true);
 			
 			if (idText != null) {
-				clientID = idText;
+				Client.clientID = idText;
 				System.out.println(clientID);
 			}
 			writer.println("ID&" + clientID);
+			
 		} catch (Exception e) {
 			System.out.println(TAG + "Id Msg fail...");
+		}
+	}
+	
+	public void send_IdTotalList() {		
+		try {
+			writer = new PrintWriter(socket.getOutputStream(), true);
+			writer.println("IDTotalLIST&");
+		} catch (Exception e) {
+			System.out.println(TAG + "Id Msg fail...");
+		}
+	}
+	
+	public void sendReady() {
+		try {
+			isReady = !isReady;
+			writer = new PrintWriter(socket.getOutputStream(), true);
+			writer.println("READY&" + clientID + "&" + String.valueOf(isReady));
+		} catch (Exception e) {
+			System.out.println(TAG + "Ready Msg send fail...");
 		}
 	}
 	
@@ -78,24 +97,6 @@ public class Client {
 			writer.println("CHAT&" + clientID +"&" + chatText);
 		} catch (Exception e) {
 			System.out.println(TAG + "Chat Msg fail...");
-		}
-	}
-	
-	public void sendReady() {
-		try {
-			writer = new PrintWriter(socket.getOutputStream(), true);
-			writer.println("READY&" +clientID);
-		} catch (Exception e) {
-			System.out.println(TAG + "Ready Msg send fail...");
-		}
-	}
-	
-	public void sendPrepare() {
-		try {
-			writer = new PrintWriter(socket.getOutputStream(), true);
-			writer.println("PREPARE&" + clientID);
-		} catch (Exception e) {
-			System.out.println(TAG + "Ready Msg send fail...");
 		}
 	}
 	
