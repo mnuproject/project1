@@ -32,7 +32,7 @@ public class Ui5 extends JPanel{
 	
 	public Ui5() {
 		uiTool = new UiTool();
-		soundEffect = new GameSound("bgm/bg1.wav");
+		soundEffect = new GameSound(null);
 		setLayout(null);
 		uI1_DesignLayout();
 		uI5_listener();
