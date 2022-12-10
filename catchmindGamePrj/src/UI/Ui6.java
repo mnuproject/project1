@@ -89,7 +89,7 @@ public class Ui6 extends JPanel{
 	
 	public Ui6() {
 		uiTool = new UiTool();
-		soundEffect = new GameSound("bgm/bg1.wav");
+		soundEffect = new GameSound(null);
 		
 		setLayout(null);
 		setBackground(new Color(239, 228, 176));
