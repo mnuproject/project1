@@ -59,7 +59,6 @@ public class Ui1 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				sound.playEffect("bgm/effect_turn.wav");
-				sound.stopBg();
 				uiTool.setUI(Ui1.this, new Ui2());
 			}
 		});
