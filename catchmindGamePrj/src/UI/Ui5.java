@@ -110,6 +110,7 @@ public class Ui5 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				uiTool.setUI(Ui5.this, new Ui6());
+				Ui6.playTurn.setText("주제: 동물");
 			}
 			
 		});
@@ -117,6 +118,7 @@ public class Ui5 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				uiTool.setUI(Ui5.this, new Ui6());
+				Ui6.playTurn.setText("주제: 음식");
 			}
 			
 		});
@@ -124,6 +126,7 @@ public class Ui5 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				uiTool.setUI(Ui5.this, new Ui6());
+				Ui6.playTurn.setText("주제: 과일");
 			}
 			
 		});
@@ -131,6 +134,7 @@ public class Ui5 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				uiTool.setUI(Ui5.this, new Ui6());
+				Ui6.playTurn.setText("주제: 게임제목");
 			}
 			
 		});

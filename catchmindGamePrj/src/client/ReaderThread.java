@@ -2,15 +2,14 @@ package client;
 
 import java.awt.*;
 import java.io.*;
-
-import javax.swing.JOptionPane;
-
 import UI.*;
 import item.TimerTh;
 import server.GameServer;
 
 public class ReaderThread extends Thread {
 	private final String TAG = "Reader : ";
+	private final String turnQ = "출제자";
+	private final String turnA = "수험자";
 	private BufferedReader reader;
 	
 	@Override
@@ -25,6 +24,7 @@ public class ReaderThread extends Thread {
 				
 				read_IdTotalList(parsReaderMsg);
 				readReadyList(parsReaderMsg);
+				readStart(parsReaderMsg);
 				
 				readChatUI4(parsReaderMsg);
 				readColor(parsReaderMsg);
@@ -108,6 +108,94 @@ public class ReaderThread extends Thread {
 		}
 	}
 	
+	private void readStart(String[] parsReaderMsg) {
+		if (parsReaderMsg[0].equals("START")) {
+			try {
+				Ui6.btnReady.setVisible(false);
+				Ui6.btnFin.setVisible(true);
+				int turn = Integer.parseInt(parsReaderMsg[1]);
+				int total = Integer.parseInt(parsReaderMsg[2]);
+				uiTurn(turn, total);
+				
+				Ui6.taChat.setText(Ui6.taChat.getText() + "\n" + "***********************");
+				Ui6.taChat.setText(Ui6.taChat.getText() + "\n" + "게임시작");
+				Ui6.taChat.setText(Ui6.taChat.getText() + "\n" + "***********************");
+				Ui6.playTurn.setText("턴 " + parsReaderMsg[1] + " / " + parsReaderMsg[2]);
+			} catch (Exception e) {}
+			
+			new TimerTh().start();
+		}
+	}
+	
+	private void uiTurn(int n, int total) {
+		try {
+			if (total == 2) {
+				//turn
+				if (n % 2 == 1) {
+					Ui6.idProfileReady1.setText(turnQ);
+					Ui6.idProfileReady2.setText(turnA);
+				}
+				else if (n % 2 == 0) {
+					Ui6.idProfileReady1.setText(turnA);
+					Ui6.idProfileReady2.setText(turnQ);
+				}
+			}
+			else if (total == 3) {
+				if (n % 3 == 1) {
+					Ui6.idProfileReady1.setText(turnQ);
+					Ui6.idProfileReady2.setText(turnA);
+					Ui6.idProfileReady3.setText(turnA);
+				}
+				else if (n % 3 == 2) {
+					Ui6.idProfileReady1.setText(turnA);
+					Ui6.idProfileReady2.setText(turnQ);
+					Ui6.idProfileReady3.setText(turnA);
+				}
+				else if (n % 3 == 0) {
+					Ui6.idProfileReady1.setText(turnA);
+					Ui6.idProfileReady2.setText(turnA);
+					Ui6.idProfileReady3.setText(turnQ);
+				}
+			}
+			else if (total == 4) {
+				if (n % 4 == 1) {
+					Ui6.idProfileReady1.setText(turnQ);
+					Ui6.idProfileReady2.setText(turnA);
+					Ui6.idProfileReady3.setText(turnA);
+					Ui6.idProfileReady4.setText(turnA);
+				}
+				else if (n % 4 == 2) {
+					Ui6.idProfileReady1.setText(turnA);
+					Ui6.idProfileReady2.setText(turnQ);
+					Ui6.idProfileReady3.setText(turnA);
+					Ui6.idProfileReady4.setText(turnA);
+				}
+				else if (n % 4 == 3) {
+					Ui6.idProfileReady1.setText(turnA);
+					Ui6.idProfileReady2.setText(turnA);
+					Ui6.idProfileReady3.setText(turnQ);
+					Ui6.idProfileReady4.setText(turnA);
+				}
+				else if (n % 4 == 0) {
+					Ui6.idProfileReady1.setText(turnA);
+					Ui6.idProfileReady2.setText(turnA);
+					Ui6.idProfileReady3.setText(turnA);
+					Ui6.idProfileReady4.setText(turnQ);
+				}
+			}			
+		} catch (Exception e) {}
+	}
+	
+	private void readPlay(String[] parsReaderMsg) {
+		if (parsReaderMsg[0].equals("START")) {
+			try {
+				Ui6.playTurn.setText("턴 " + "" + " / " + GameServer.vcClient.size());
+			} catch (Exception e) {}
+			
+			new TimerTh().start();
+		}
+	}
+	
 	private void readColor(String[] parsReaderMsg) {
 		if (parsReaderMsg[0].equals("COLOR")) {
 			System.out.println(TAG + "color change");
@@ -183,7 +271,8 @@ public class ReaderThread extends Thread {
 		if (parsReaderMsg[0].equals("CHAT")) {
 			System.out.println(TAG + "chat");
 			try {
-				Ui6.taChat.setText(Ui6.taChat.getText()+"\n"+parsReaderMsg[1]);				
+				Ui6.taChat.setText(Ui6.taChat.getText()+"\n"+parsReaderMsg[1]);
+				Ui6.scrChat.getVerticalScrollBar().setValue(Ui6.scrChat.getVerticalScrollBar().getMaximum());
 			} catch (Exception e) {}
 		}
 	}
@@ -195,6 +284,7 @@ public class ReaderThread extends Thread {
 			Ui6.playTitle.setText("제시어 : 동물");
 			Ui6.playTitle.setFont(new Font("맑은고딕", Font.BOLD, 16));
 			Ui6.taChat.setText(Ui6.taChat.getText()+"\n"+parsReaderMsg[1]);
+			Ui6.scrChat.getVerticalScrollBar().setValue(Ui6.scrChat.getVerticalScrollBar().getMaximum());
 		}
 	}
 	
@@ -205,6 +295,7 @@ public class ReaderThread extends Thread {
 			Ui6.playTitle.setText("제시어 : 쿠키");
 			Ui6.playTitle.setFont(new Font("맑은고딕", Font.BOLD, 16));
 			Ui6.taChat.setText(Ui6.taChat.getText()+"\n"+parsReaderMsg[1]);
+			Ui6.scrChat.getVerticalScrollBar().setValue(Ui6.scrChat.getVerticalScrollBar().getMaximum());
 		}
 	}
 	
@@ -215,6 +306,7 @@ public class ReaderThread extends Thread {
 			Ui6.playTitle.setText("제시어 : 귤");
 			Ui6.playTitle.setFont(new Font("맑은고딕", Font.BOLD, 16));
 			Ui6.taChat.setText(Ui6.taChat.getText()+"\n"+parsReaderMsg[1]);
+			Ui6.scrChat.getVerticalScrollBar().setValue(Ui6.scrChat.getVerticalScrollBar().getMaximum());
 		}
 	}
 	
@@ -225,6 +317,7 @@ public class ReaderThread extends Thread {
 			Ui6.playTitle.setText("제시어 : 오버워치");
 			Ui6.playTitle.setFont(new Font("맑은고딕", Font.BOLD, 16));
 			Ui6.taChat.setText(Ui6.taChat.getText()+"\n"+parsReaderMsg[1]);
+			Ui6.scrChat.getVerticalScrollBar().setValue(Ui6.scrChat.getVerticalScrollBar().getMaximum());
 		}
 	}
 }

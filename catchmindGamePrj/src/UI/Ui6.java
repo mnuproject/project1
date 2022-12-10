@@ -48,7 +48,7 @@ public class Ui6 extends JPanel{
 	private Screen screen;
 	
 	//draw
-	private JPanel colorPallet;
+	public static JPanel colorPallet;
 	private JButton btnBlackDrawPen;
 	private JButton btnRedDrawPen;
 	private JButton btnOrangeDrawPen;
@@ -85,7 +85,7 @@ public class Ui6 extends JPanel{
 	
 	//ready
 	public static JButton btnReady;
-
+	public static JButton btnFin;
 	
 	public Ui6() {
 		uiTool = new UiTool();
@@ -113,9 +113,9 @@ public class Ui6 extends JPanel{
 		playTitle = new JLabel("캐치마인드");
 		playTitle.setFont(uiTool.ftMedium());
 		playTitle.setBounds(0, 15, 190, 30);
-		playTurn = new JLabel("턴 2 / 8");
+		playTurn = new JLabel("주제: 동물");
 		playTurn.setFont(uiTool.ftSmall());
-		playTurn.setBounds(0, 60, 100, 30);
+		playTurn.setBounds(0, 60, 190, 30);
 		titlePanel.add(playTitle);
 		titlePanel.add(playTurn);
 		
@@ -226,6 +226,7 @@ public class Ui6 extends JPanel{
 		btnItem1.setBounds(5, 500, 50, 50);
 		btnItem1.setBackground(new Color(250, 160, 40));
 		btnItem1.setBorderPainted(false);
+		btnItem1.setToolTipText("초성힌트");
 		chatPanel.add(btnItem1);
 		
 		nItemTx1 = new JLabel("0");
@@ -239,6 +240,7 @@ public class Ui6 extends JPanel{
 		btnItem2.setBounds(60, 500, 50, 50);
 		btnItem2.setBackground(new Color(150, 150, 50));
 		btnItem2.setBorderPainted(false);
+		btnItem2.setToolTipText("글자힌트");
 		chatPanel.add(btnItem2);
 		
 		nItemTx2 = new JLabel("0");
@@ -252,6 +254,7 @@ public class Ui6 extends JPanel{
 		btnItem3.setBounds(115, 500, 50, 50);
 		btnItem3.setBackground(new Color(150, 50, 176));
 		btnItem3.setBorderPainted(false);
+		btnItem3.setToolTipText("먹물");
 		chatPanel.add(btnItem3);
 		
 		nItemTx3 = new JLabel("0");
@@ -265,6 +268,7 @@ public class Ui6 extends JPanel{
 		btnItem4.setBounds(170, 500, 50, 50);
 		btnItem4.setBackground(new Color(150, 150, 210));
 		btnItem4.setBorderPainted(false);
+		btnItem4.setToolTipText("먹물방어");
 		chatPanel.add(btnItem4);
 		
 		nItemTx4 = new JLabel();
@@ -279,6 +283,15 @@ public class Ui6 extends JPanel{
 		btnReady.setBackground(new Color(220, 220, 220));
 		btnReady.setBorder(new LineBorder(new Color(87, 87, 87), 5, true));
 		chatPanel.add(btnReady);
+		add(chatPanel);
+		
+		btnFin = new JButton("종료");
+		btnFin.setFont(uiTool.ftMedium());
+		btnFin.setBounds(20, 600, 180, 80);
+		btnFin.setBackground(new Color(220, 220, 220));
+		btnFin.setBorder(new LineBorder(new Color(87, 87, 87), 5, true));
+		btnFin.setVisible(false);
+		chatPanel.add(btnFin);
 		add(chatPanel);
 		
 		//time
@@ -461,7 +474,6 @@ public class Ui6 extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				if (sendChat.getText().length() > 0) {
 					MainFrame.clnt.sendChat(sendChat.getText());
-					//taChat.setText(taChat.getText()+"\n"+sendChat.getText());
 					sendChat.setText("");					
 				}
 			}
@@ -476,9 +488,9 @@ public class Ui6 extends JPanel{
 
 			@Override
 			public void keyPressed(KeyEvent e) {
+				Ui6.scrChat.getVerticalScrollBar().setValue(Ui6.scrChat.getVerticalScrollBar().getMaximum());
 				if (e.getKeyCode() == 10 && sendChat.getText().length() > 0) {
 					MainFrame.clnt.sendChat(sendChat.getText());
-					//taChat.setText(taChat.getText()+"\n"+sendChat.getText());
 					sendChat.setText("");
 				}
 			}
@@ -532,6 +544,13 @@ public class Ui6 extends JPanel{
 					btnReady.setText("준비");
 					btnReady.setBackground(new Color(220, 220, 220));
 				}
+			}
+		});	
+		
+		btnFin.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				uiTool.setUI(Ui6.this, new Ui7());
 			}
 		});	
 	}

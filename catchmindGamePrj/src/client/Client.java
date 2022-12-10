@@ -24,7 +24,7 @@ public class Client {
 		try {
 			socket = new Socket(GameServer.ip, GameServer.PortNum);
 			ReaderThread rt = new ReaderThread();
-			rt.start();
+			rt.start();				
 		} catch (Exception e) {
 			System.out.println(TAG + "Server connect fail..");
 		}
