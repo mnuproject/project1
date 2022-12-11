@@ -4,7 +4,11 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import gameSound.GameSound;
+
+
 public class Ui2 extends JPanel{
+	private GameSound sound;
 	private UiTool uiTool;
 	private JLabel plId1;
 	private JButton plBtn1;
@@ -13,6 +17,8 @@ public class Ui2 extends JPanel{
 	private TextField tfIdInput;
 	
 	public Ui2() {
+		sound = new GameSound("bgm/캐치마인드-로비.wav");
+		
 		uiTool = new UiTool();
 		setLayout(null);
 		uI2_DesignLayout();
@@ -46,6 +52,8 @@ public class Ui2 extends JPanel{
 		plBtn1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				sound.playEffect("bgm/effect_gamestart.wav");
+				sound.stopBg();
 				MainFrame.clnt.sendId(tfIdInput.getText());
 				uiTool.setUI(Ui2.this, Ui3.getUi3());
 				//uiTool.setUI(Ui2.this, new Ui3());

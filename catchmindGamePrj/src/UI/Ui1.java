@@ -15,7 +15,7 @@ public class Ui1 extends JPanel{
 	private JLabel plImg1; //img
 	
 	public Ui1() {
-		sound = new GameSound("bgm/bg1.wav");
+		sound = new GameSound("bgm/캐치마인드-로비.wav");
 		
 		uiTool = new UiTool();
 		setLayout(null);
@@ -56,7 +56,7 @@ public class Ui1 extends JPanel{
 		plBtn1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				sound.playEffect("bgm/effect_turn.wav");
+				sound.playEffect("bgm/effect_gamestart.wav");
 				sound.stopBg();
 				uiTool.setUI(Ui1.this, new Ui2());
 			}
@@ -66,7 +66,7 @@ public class Ui1 extends JPanel{
 	plBtn2.addActionListener(new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			sound.playEffect("bgm/effect_ring.wav");
+			sound.playEffect("bgm/effect_gameover.wav");
 			sound.stopBg();
 			System.exit(0);
 		}
