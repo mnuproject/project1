@@ -31,19 +31,30 @@ public class Ui1 extends JPanel{
 		plId1.setFont(new Font("맑은고딕", Font.BOLD, 50));
 				
 		plImg1 = new JLabel();
-		plImg1.setIcon(uiTool.getImg("img/catchMindBG.png", 1100, 710));
+		plImg1.setIcon(uiTool.getImg("img/catchMindBanner.png", 1100, 710));
 		plImg1.setBounds(-20, 0, 1100, 710);
 		//뒷배경 넣을 예정 ex)스케치북
 		
 		plBtn1 = new JButton("GAME START");
 		plBtn1.setBackground(Color.CYAN);
-		plBtn1.setBounds(90, 400, 900, 100);
+		plBtn1.setBounds(130, 510, 800, 80);
 		plBtn1.setFont(new Font("맑은고딕", Font.BOLD, 80));
+		plBtn1.setForeground(Color.ORANGE);
+		plBtn1.setBorderPainted(false);//Border 태두리제거
+		plBtn1.setContentAreaFilled(false);//영역채우기제거
+		plBtn1.setFocusPainted(false);//마우스 올릴때 테두리제거
+	    plBtn1.setOpaque(false);//투명하게 
 		
 		plBtn2 = new JButton("GAME EXIT");
 		plBtn2.setBackground(Color.ORANGE);
-		plBtn2.setBounds(90, 510, 900, 100);
+		plBtn2.setBounds(130, 610, 800, 80);
 		plBtn2.setFont(new Font("맑은고딕", Font.BOLD, 80));
+		plBtn2.setForeground(Color.ORANGE);
+		plBtn2.setBorderPainted(false);//Border 태두리제거
+		plBtn2.setContentAreaFilled(false);//영역채우기제거
+		plBtn2.setFocusPainted(false);//마우스 올릴때 테두리제거
+	    plBtn2.setOpaque(false);//투명하게 
+	    //글씨색깔 가독성 좋게 변경 예정
 
 		//add(plId1);
 		add(plBtn1);
