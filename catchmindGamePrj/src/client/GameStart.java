@@ -1,10 +1,9 @@
 package client;
 
-import javax.swing.*;
 import UI.*;
 
-public class GameStart extends JFrame {
+public class GameStart {
 	public static void main(String[] args) {
-		MainFrame.getMainFrame().setUI(new Ui1());
+		MainFrame.getMainFrame().setUI(Ui1.getUi1());
 	}
 }

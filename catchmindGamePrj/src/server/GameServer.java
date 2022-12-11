@@ -32,6 +32,7 @@ public class GameServer {
 			}
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println(TAG + "server error");
 		}
 	}

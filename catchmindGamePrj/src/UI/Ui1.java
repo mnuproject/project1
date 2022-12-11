@@ -7,6 +7,8 @@ import javax.swing.*;
 import gameSound.GameSound;
 
 public class Ui1 extends JPanel{
+	public static Ui1 ui1;
+	
 	private GameSound sound;
 	private UiTool uiTool;
 	private JLabel plId1; //text
@@ -15,13 +17,20 @@ public class Ui1 extends JPanel{
 	private JLabel plImg1; //img
 	private JLabel plImg2; //img
 	
-	public Ui1() {
+	private Ui1() {
 		sound = new GameSound("bgm/캐치마인드-로비.wav");
 		
 		uiTool = new UiTool();
 		setLayout(null);
 		uI1_DesignLayout();
 		uI1_listener();
+	}
+	
+	public static Ui1 getUi1() {
+		if (ui1 == null) {
+			ui1 = new Ui1();
+		}
+		return ui1;
 	}
 	
 	private void uI1_DesignLayout() {
@@ -66,7 +75,6 @@ public class Ui1 extends JPanel{
 		add(plBtn2);
 	    //add(plImg2);
 		add(plImg1);
-				
 	}
 	
 	private void uI1_listener() {
@@ -75,18 +83,18 @@ public class Ui1 extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				sound.playEffect("bgm/effect_gamestart.wav");
 				sound.stopBg();
-				uiTool.setUI(Ui1.this, new Ui2());
+				uiTool.setUI(Ui1.this, Ui2.getUi2());
 			}
 		});
 	
 	
-	plBtn2.addActionListener(new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			sound.playEffect("bgm/effect_gameover.wav");
-			sound.stopBg();
-			System.exit(0);
-		}
-	});
-	}
+		plBtn2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				sound.playEffect("bgm/effect_gameover.wav");
+				sound.stopBg();
+				System.exit(0);
+			}
+		});
+	}	
 }

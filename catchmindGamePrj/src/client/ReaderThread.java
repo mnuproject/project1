@@ -4,7 +4,6 @@ import java.awt.*;
 import java.io.*;
 import UI.*;
 import item.TimerTh;
-import server.GameServer;
 
 public class ReaderThread extends Thread {
 	private final String TAG = "Reader : ";

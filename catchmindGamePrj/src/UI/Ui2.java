@@ -5,9 +5,12 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import gameSound.GameSound;
-
+import server.ClientInfo;
+import server.GameServer;
 
 public class Ui2 extends JPanel{
+	public static Ui2 ui2;
+	
 	private GameSound sound;
 	private UiTool uiTool;
 	private JLabel plId1;
@@ -17,7 +20,7 @@ public class Ui2 extends JPanel{
 	
 	private TextField tfIdInput;
 	
-	public Ui2() {
+	private Ui2() {
 		sound = new GameSound("bgm/캐치마인드-로비.wav");
 		
 		uiTool = new UiTool();
@@ -25,6 +28,13 @@ public class Ui2 extends JPanel{
 		uI2_DesignLayout();
 		uI2_listener();
 	}	
+	
+	public static Ui2 getUi2() {
+		if (ui2 == null) {
+			ui2 = new Ui2();
+		}
+		return ui2;
+	}
 	
 	private void uI2_DesignLayout() {
 		plId1 = new JLabel("아이디를 입력해주세요");

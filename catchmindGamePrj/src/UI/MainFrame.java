@@ -4,7 +4,7 @@ import javax.swing.*;
 import client.Client;
 
 public class MainFrame extends JFrame{
-	public static MainFrame singleton;
+	public static MainFrame mainframe;
 	public static Client clnt;
 	
 	private MainFrame() {
@@ -20,10 +20,10 @@ public class MainFrame extends JFrame{
 	}
 	
 	public static MainFrame getMainFrame() {
-		if (singleton == null) {
-			singleton = new MainFrame();
+		if (mainframe == null) {
+			mainframe = new MainFrame();
 		}
-		return singleton;
+		return mainframe;
 	}
 	
 	public void setUI(JPanel rmPanel, JPanel panel) {
