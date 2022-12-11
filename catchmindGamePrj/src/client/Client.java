@@ -64,6 +64,24 @@ public class Client {
 		}
 	}
 	
+	public void sendFinTurn() {
+		try {
+			writer = new PrintWriter(socket.getOutputStream(), true);
+			writer.println("FTURN&");
+		} catch (Exception e) {
+			System.out.println(TAG + "Finish Turn Msg send fail...");
+		}
+	}
+	
+	public void sendFinish() {
+		try {
+			writer = new PrintWriter(socket.getOutputStream(), true);
+			writer.println("FINISH&");
+		} catch (Exception e) {
+			System.out.println(TAG + "Finish Msg send fail...");
+		}
+	}
+	
 	public void sendColor(String colorText) {
 		try {
 			writer = new PrintWriter(socket.getOutputStream(), true);
@@ -133,6 +151,15 @@ public class Client {
 			writer.println("ITEM4&" + clientID);
 		} catch (Exception e) {
 			System.out.println(TAG + "item4 Msg fail...");
+		}
+	}
+	
+	public void sendExit() {
+		try {
+			writer = new PrintWriter(socket.getOutputStream(), true);
+			writer.println("EXIT&" + clientID);
+		} catch (Exception e) {
+			System.out.println(TAG + "Exit Msg fail...");
 		}
 	}
 }

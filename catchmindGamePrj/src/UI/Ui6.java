@@ -12,6 +12,8 @@ import server.GameServer;
 import gameSound.GameSound;
 
 public class Ui6 extends JPanel{
+	public static Ui6 ui6;
+	
 	private UiTool uiTool;
 	private GameSound soundEffect;
 	
@@ -69,25 +71,25 @@ public class Ui6 extends JPanel{
 	//item
 	private JButton btnItem1;
 	private JLabel nItemTx1;
-	private int numItem1 = 0;
+	private int numItem1 = 3;
 	
 	public static JButton btnItem2;
 	public static JLabel nItemTx2;
-	private int numItem2 = 0;
+	private int numItem2 = 3;
 	
 	public static JButton btnItem3;
 	public static JLabel nItemTx3;
-	private int numItem3 = 0;
+	private int numItem3 = 2;
 	
 	public static JButton btnItem4;
 	public static JLabel nItemTx4;
-	private int numItem4 = 0;
+	private int numItem4 = 2;
 	
 	//ready
 	public static JButton btnReady;
 	public static JButton btnFin;
 	
-	public Ui6() {
+	private Ui6() {
 		uiTool = new UiTool();
 		soundEffect = new GameSound(null);
 		
@@ -97,6 +99,13 @@ public class Ui6 extends JPanel{
 		uI6_listener();
 		MainFrame.clnt.send_IdTotalList();
 	}	
+	
+	public static Ui6 getUi6() {
+		if (ui6 == null) {
+			ui6 = new Ui6();
+		}
+		return ui6;
+	}
 	
 	private void uI6_DesignLayout() {
 		//IdProfile
@@ -505,28 +514,40 @@ public class Ui6 extends JPanel{
 		btnItem1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainFrame.clnt.sendItem2();
+				if (numItem1 > 0) {
+					MainFrame.clnt.sendItem1();
+					nItemTx1.setText(String.valueOf(--numItem1));
+				}
 			}
 		});	
 		
 		btnItem2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainFrame.clnt.sendItem2();
+				if (numItem2 > 0) {
+					MainFrame.clnt.sendItem2();
+					nItemTx2.setText(String.valueOf(--numItem2));
+				}
 			}
 		});	
 		
 		btnItem3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainFrame.clnt.sendItem3();
+				if (numItem3 > 0) {
+					MainFrame.clnt.sendItem3();
+					nItemTx3.setText(String.valueOf(--numItem3));
+				}
 			}
 		});	
 		
 		btnItem4.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainFrame.clnt.sendItem4();
+				if (numItem4 > 0) {
+					MainFrame.clnt.sendItem4();
+					nItemTx4.setText(String.valueOf(--numItem4));
+				}
 			}
 		});	
 		
@@ -550,8 +571,12 @@ public class Ui6 extends JPanel{
 		btnFin.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				uiTool.setUI(Ui6.this, new Ui7());
+				MainFrame.clnt.sendFinish();
 			}
 		});	
+	}
+	
+	public JPanel getColorPallet() {
+		return colorPallet;
 	}
 }

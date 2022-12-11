@@ -5,6 +5,8 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class Ui4 extends JPanel{
+	public static Ui4 ui4;
+	
 	private UiTool uiTool;
 	private JButton plBtn1;
 	private JButton plBtn2;
@@ -17,12 +19,19 @@ public class Ui4 extends JPanel{
 	TextField tf1 = new TextField("text field");
 	
 	
-	public Ui4() {
+	private Ui4() {
 		uiTool = new UiTool();
 		setLayout(null);
 		uI1_DesignLayout();
 		uI1_listener();
 	}	
+	
+	public static Ui4 getUi4() {
+		if (ui4 == null) {
+			ui4 = new Ui4();
+		}
+		return ui4;
+	}
 	
 	private void uI1_DesignLayout() {
 		
@@ -104,7 +113,7 @@ public class Ui4 extends JPanel{
 		plBtn5.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				uiTool.setUI(Ui4.this, new Ui5());
+				uiTool.setUI(Ui4.this, Ui5.getUi5());
 			}
 		});
 	

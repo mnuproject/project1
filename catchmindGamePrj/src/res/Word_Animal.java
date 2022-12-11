@@ -2,10 +2,9 @@ package res;
 
 public class Word_Animal {
 	public static String[] problemAnimal = {
-			"마라탕1", 
-			"조기2", 
-			"닭곰탕3", 
-			"탕수육4"
+			"동물",
+			"",
+			""
 		};
 	
 	public static String[][] problemAnimal_Hint1 = {

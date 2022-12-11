@@ -36,7 +36,7 @@ public class Screen extends Canvas implements MouseMotionListener, ComponentList
 	}
 	
 	private void initBuffer() {
-		this.offScreen = MainFrame.singleton.createImage(getWidth(), getHeight());
+		this.offScreen = MainFrame.getMainFrame().createImage(getWidth(), getHeight());
 		this.bufferGraphics = offScreen.getGraphics();
 	}
 	

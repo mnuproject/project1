@@ -8,6 +8,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
 public class Ui7 extends JPanel{
+	public static Ui7 ui7;
+	
 	private UiTool uiTool;
 	private JLabel plId1;
 	private JLabel plId2;
@@ -22,14 +24,34 @@ public class Ui7 extends JPanel{
 		       {"3", "C", "77"},
 		       {"4", "D", "50"}
 	};
-
-	public Ui7() {
+	
+	
+	//server로 부터 받은 데이터
+	//아이디 , 점수
+	public static Object[][] data1 = {
+				{"", "", ""},
+				{"", "", ""},
+				{"", "", ""},
+				{"", "", ""}
+	};
+	
+	
+	private Ui7() {
 		uiTool = new UiTool();
 		setLayout(null);
 		uI7_DesignLayout();
 		uI71_listener();
 		uI72_listener();
-	}	
+	}
+	
+	public static Ui7 getUi7() {
+		if (ui7 == null) {
+			ui7 = new Ui7();
+		}
+		return ui7;
+	}
+	
+
 	
 	private void uI7_DesignLayout() {
 		JPanel titlePanel = new JPanel();
@@ -49,7 +71,7 @@ public class Ui7 extends JPanel{
 		plId2.setBackground(new Color(255, 215, 0));
 		plId2.setBounds(1000, 100, 400, 50);
 		
-		JTable table = new JTable(data, columnType);
+		JTable table = new JTable(data1, columnType);
 		table.setRowHeight(50);
 		table.setIntercellSpacing(new Dimension(5,2));
 		DefaultTableCellRenderer celAlignCenter = new DefaultTableCellRenderer();
@@ -109,7 +131,7 @@ public class Ui7 extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				//sound.playEffect("bgm/effect_turn.wav");
 				//sound.stopBg();
-				uiTool.setUI(Ui7.this, new Ui3());
+				uiTool.setUI(Ui7.getUi7(), Ui3.getUi3());
 			}
 		});
 	}
@@ -117,6 +139,7 @@ public class Ui7 extends JPanel{
 		plBtn2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				MainFrame.clnt.sendExit();
 				System.exit(0);
 			}
 		});

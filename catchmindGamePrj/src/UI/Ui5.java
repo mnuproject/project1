@@ -9,6 +9,8 @@ import javax.swing.*;
 import gameSound.GameSound;
 //음악넣기, UI5 >> 버튼에다가 이미지 넣기, UI6번으로 넘기기. , 이미지 첨부해주기.
 public class Ui5 extends JPanel{
+	public static Ui5 ui5;
+
 	ImageIcon img1 = new ImageIcon("img/animal_img.png");
 	ImageIcon img2 = new ImageIcon("img/food_img.png");
 	ImageIcon img3 = new ImageIcon("img/fruit_img.png");
@@ -30,7 +32,7 @@ public class Ui5 extends JPanel{
 
 	private JLabel plImg1;
 	
-	public Ui5() {
+	private Ui5() {
 		uiTool = new UiTool();
 		soundEffect = new GameSound(null);
 		setLayout(null);
@@ -38,6 +40,13 @@ public class Ui5 extends JPanel{
 		uI5_listener();
 		
 	}	
+
+	public static Ui5 getUi5() {
+		if (ui5 == null) {
+			ui5 = new Ui5();
+		}
+		return ui5;
+	}
 	
 	private void uI1_DesignLayout() {
 		plId1 = new JLabel("테마선택하기(동물,음식,과일,게임제목)");
@@ -109,7 +118,7 @@ public class Ui5 extends JPanel{
 		plBtn1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				uiTool.setUI(Ui5.this, new Ui6());
+				uiTool.setUI(Ui5.getUi5(), Ui6.getUi6());
 				Ui6.playTurn.setText("주제: 동물");
 			}
 			
@@ -117,7 +126,7 @@ public class Ui5 extends JPanel{
 		plBtn2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				uiTool.setUI(Ui5.this, new Ui6());
+				uiTool.setUI(Ui5.getUi5(), Ui6.getUi6());
 				Ui6.playTurn.setText("주제: 음식");
 			}
 			
@@ -125,7 +134,7 @@ public class Ui5 extends JPanel{
 		plBtn3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				uiTool.setUI(Ui5.this, new Ui6());
+				uiTool.setUI(Ui5.getUi5(), Ui6.getUi6());
 				Ui6.playTurn.setText("주제: 과일");
 			}
 			
@@ -133,7 +142,7 @@ public class Ui5 extends JPanel{
 		plBtn4.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				uiTool.setUI(Ui5.this, new Ui6());
+				uiTool.setUI(Ui5.getUi5(), Ui6.getUi6());
 				Ui6.playTurn.setText("주제: 게임제목");
 			}
 			

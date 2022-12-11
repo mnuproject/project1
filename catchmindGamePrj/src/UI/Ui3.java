@@ -5,6 +5,8 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class Ui3 extends JPanel{
+	public static Ui3 ui3;
+	
 	private UiTool uiTool;
 	private JLabel plId1;
 	
@@ -20,12 +22,19 @@ public class Ui3 extends JPanel{
 	private JLabel plImg1;
 	private JLabel plImg2;
 	
-	public Ui3() {
+	private Ui3() {
 		uiTool = new UiTool();
 		setLayout(null);
 		uI1_DesignLayout();
 		uI1_listener();
-	}	
+	}
+	
+	public static Ui3 getUi3() {
+		if (ui3 == null) {
+			ui3 = new Ui3();
+		}
+		return ui3;
+	}
 	
 	private void uI1_DesignLayout() {
 		
@@ -95,25 +104,25 @@ public class Ui3 extends JPanel{
 		plBtn5.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				uiTool.setUI(Ui3.this, new Ui4());
+				uiTool.setUI(Ui3.this, Ui4.getUi4());
 			}
 		});
 		plBtn6.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				uiTool.setUI(Ui3.this, new Ui4());
+				uiTool.setUI(Ui3.this, Ui4.getUi4());
 			}
 		});
 		plBtn7.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				uiTool.setUI(Ui3.this, new Ui4());
+				uiTool.setUI(Ui3.this, Ui4.getUi4());
 			}
 		});
 		plBtn8.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				uiTool.setUI(Ui3.this, new Ui4());
+				uiTool.setUI(Ui3.this, Ui4.getUi4());
 			}
 		});
 	}

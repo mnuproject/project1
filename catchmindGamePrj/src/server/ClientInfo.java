@@ -5,8 +5,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-import UI.Ui6;
-
 public class ClientInfo extends Thread {
 	private final String TAG = "ClientInfo : ";
 	
@@ -17,7 +15,13 @@ public class ClientInfo extends Thread {
 	public String clientID = "user";
 	public boolean isReady = false;
 	public int score = 0;
-	public int turn = 1;
+	public int userTurn = 0;
+	
+	private boolean isStart = false;
+	private boolean isTurn = false;
+	public int serverTurn = 0;
+	private int problemSubject = 0;
+	private int problemN = 0;
 
 	// 생성자에서 클라이언트 소켓을 내부 클래스 소켓에 담는다.
 	public ClientInfo(Socket socket) {
@@ -40,7 +44,11 @@ public class ClientInfo extends Thread {
 				protocolID(parsReaderMsg);
 				protocolReady(parsReaderMsg);
 				protocol_IDTotalList(parsReaderMsg);
-				protocolTurn(parsReaderMsg);
+				protocolTurn();
+				protocolFinish(parsReaderMsg);
+				protocolExit(parsReaderMsg);
+				protocolFinTurn(parsReaderMsg);
+				protocolScore(parsReaderMsg);
 				
 				protocolColor(parsReaderMsg);
 				protocolDraw(parsReaderMsg);
@@ -61,6 +69,7 @@ public class ClientInfo extends Thread {
 			this.clientID = parsReaderMsg[1];
 			for (int i = 0; i < GameServer.vcClient.size(); i++) {
 				GameServer.vcClient.get(i).writer.println("CHAT&[" + clientID + "] is enter the room.");
+				GameServer.vcClient.get(i).userTurn = i;
 				GameServer.vcClient.get(i).score = 0;
 			}
 		}
@@ -110,16 +119,97 @@ public class ClientInfo extends Thread {
 		
 		for (int i = 0; i < GameServer.vcClient.size(); i++) {
 			GameServer.vcClient.get(i).writer.println("START&"
-				+ String.valueOf(turn)
+				+ String.valueOf(serverTurn)
 				+ "&" + String.valueOf(GameServer.vcClient.size()*2));
 		}
 		
+		isStart = true;
+		for (int i = 0; i < GameServer.vcClient.size(); i++) {
+			GameServer.vcClient.get(i).writer.println("TURN&");
+		}
+			
 		return null;
 	}
+
+	private void protocolTurn() {
+		if (isStart == true) {
+			System.out.println("PROTOCOL userTurn: " + userTurn);
+			for (int i = 0; i < GameServer.vcClient.size(); i++) {
+				if (GameServer.vcClient.get(i).userTurn == serverTurn) {
+					for (int j = 0; j < GameServer.vcClient.size(); j++) {
+						GameServer.vcClient.get(j).writer.println("NOTTURN"
+							+ "&" + String.valueOf(serverTurn)
+							+ "&" + String.valueOf(GameServer.vcClient.size()*2));
+					}
+					GameServer.vcClient.get(i).writer.println("TURN"
+							+ "&" + String.valueOf(serverTurn)
+							+ "&" + String.valueOf(GameServer.vcClient.size()*2));
+				}
+			}
+		}
+	}
 	
-	private void protocolTurn(String[] parsReaderMsg) {
-		if (parsReaderMsg[0].equals("TURN")) {
-			
+	private void protocolFinTurn(String[] parsReaderMsg) {
+		if (parsReaderMsg[0].equals("FTURN")) {
+			for (int i = 0; i < GameServer.vcClient.size(); i++) {
+				GameServer.vcClient.get(i).serverTurn = serverTurn++;
+				GameServer.vcClient.get(i).writer.println("TURN&");
+			}
+		}
+	}
+	
+	private void protocolFinish(String[] parsReaderMsg) {
+		//Finish
+		if (parsReaderMsg[0].equals("FINISH")) {
+			System.out.println(TAG + "PROTOCOL Finish");
+			for (int i = 0; i < GameServer.vcClient.size(); i++) {
+				for (int j = 0; j < GameServer.vcClient.size(); j++) {
+					GameServer.vcClient.get(i).writer.println(
+							"FINISH" 
+							+ "&" + String.valueOf(j) 
+							+ "&" + GameServer.vcClient.get(j).clientID
+							+ "&" + String.valueOf(GameServer.vcClient.get(j).score));
+				}
+			}			
+		}
+		
+		//자동종료
+		if (serverTurn == GameServer.vcClient.size()*2) {
+			System.out.println(TAG + "PROTOCOL Finish");
+			for (int i = 0; i < GameServer.vcClient.size(); i++) {
+				for (int j = 0; j < GameServer.vcClient.size(); j++) {
+					GameServer.vcClient.get(i).writer.println(
+							"FINISH" 
+							+ "&" + String.valueOf(j) 
+							+ "&" + GameServer.vcClient.get(j).clientID
+							+ "&" + String.valueOf(GameServer.vcClient.get(j).score));
+				}
+			}		
+		}
+	}
+	
+	private void protocolExit(String[] parsReaderMsg) {
+		if (parsReaderMsg[0].equals("EXIT")) {
+			System.out.println(TAG + "PROTOCOL Exit");
+			for(int i = 0; i < GameServer.vcClient.size(); i++) {
+				if (GameServer.vcClient.get(i).clientID.equals(parsReaderMsg[1])) {
+					GameServer.vcClient.remove(i);					
+				}
+			}			
+		}
+	}
+	
+	private void protocolScore(String[] parsReaderMsg) {
+		if (parsReaderMsg[0].equals("SCORE")) {
+			System.out.println(TAG + "PROTOCOL Score");
+			for (int i = 0; i < GameServer.vcClient.size(); i++) {
+				if (GameServer.vcClient.get(i).clientID.equals(parsReaderMsg[1])) {
+					GameServer.vcClient.get(i).score = 100;
+					for (int j = 0; j < GameServer.vcClient.size(); j++) {
+						GameServer.vcClient.get(j).writer.println("SCORE&");
+					}					
+				}
+			}		
 		}
 	}
 	

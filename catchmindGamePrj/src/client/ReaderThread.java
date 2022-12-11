@@ -25,6 +25,11 @@ public class ReaderThread extends Thread {
 				read_IdTotalList(parsReaderMsg);
 				readReadyList(parsReaderMsg);
 				readStart(parsReaderMsg);
+				readFinish(parsReaderMsg);
+				readServer(parsReaderMsg);
+
+				readTurn(parsReaderMsg);
+				readNotTurn(parsReaderMsg);
 				
 				readChatUI4(parsReaderMsg);
 				readColor(parsReaderMsg);
@@ -113,17 +118,16 @@ public class ReaderThread extends Thread {
 			try {
 				Ui6.btnReady.setVisible(false);
 				Ui6.btnFin.setVisible(true);
-				int turn = Integer.parseInt(parsReaderMsg[1]);
+				int userTurn = Integer.parseInt(parsReaderMsg[1]);
 				int total = Integer.parseInt(parsReaderMsg[2]);
-				uiTurn(turn, total);
+				uiTurn(userTurn, total);
 				
+				Screen.getScreen().setClear();
 				Ui6.taChat.setText(Ui6.taChat.getText() + "\n" + "***********************");
 				Ui6.taChat.setText(Ui6.taChat.getText() + "\n" + "게임시작");
 				Ui6.taChat.setText(Ui6.taChat.getText() + "\n" + "***********************");
-				Ui6.playTurn.setText("턴 " + parsReaderMsg[1] + " / " + parsReaderMsg[2]);
+				Ui6.playTurn.setText("턴 " + String.valueOf(++userTurn) + " / " + parsReaderMsg[2]);
 			} catch (Exception e) {}
-			
-			new TimerTh().start();
 		}
 	}
 	
@@ -131,52 +135,52 @@ public class ReaderThread extends Thread {
 		try {
 			if (total == 2) {
 				//turn
-				if (n % 2 == 1) {
+				if (n % 2 == 0) {
 					Ui6.idProfileReady1.setText(turnQ);
 					Ui6.idProfileReady2.setText(turnA);
 				}
-				else if (n % 2 == 0) {
+				else if (n % 2 == 1) {
 					Ui6.idProfileReady1.setText(turnA);
 					Ui6.idProfileReady2.setText(turnQ);
 				}
 			}
 			else if (total == 3) {
-				if (n % 3 == 1) {
+				if (n % 3 == 0) {
 					Ui6.idProfileReady1.setText(turnQ);
 					Ui6.idProfileReady2.setText(turnA);
 					Ui6.idProfileReady3.setText(turnA);
 				}
-				else if (n % 3 == 2) {
+				else if (n % 3 == 1) {
 					Ui6.idProfileReady1.setText(turnA);
 					Ui6.idProfileReady2.setText(turnQ);
 					Ui6.idProfileReady3.setText(turnA);
 				}
-				else if (n % 3 == 0) {
+				else if (n % 3 == 2) {
 					Ui6.idProfileReady1.setText(turnA);
 					Ui6.idProfileReady2.setText(turnA);
 					Ui6.idProfileReady3.setText(turnQ);
 				}
 			}
 			else if (total == 4) {
-				if (n % 4 == 1) {
+				if (n % 4 == 0) {
 					Ui6.idProfileReady1.setText(turnQ);
 					Ui6.idProfileReady2.setText(turnA);
 					Ui6.idProfileReady3.setText(turnA);
 					Ui6.idProfileReady4.setText(turnA);
 				}
-				else if (n % 4 == 2) {
+				else if (n % 4 == 1) {
 					Ui6.idProfileReady1.setText(turnA);
 					Ui6.idProfileReady2.setText(turnQ);
 					Ui6.idProfileReady3.setText(turnA);
 					Ui6.idProfileReady4.setText(turnA);
 				}
-				else if (n % 4 == 3) {
+				else if (n % 4 == 2) {
 					Ui6.idProfileReady1.setText(turnA);
 					Ui6.idProfileReady2.setText(turnA);
 					Ui6.idProfileReady3.setText(turnQ);
 					Ui6.idProfileReady4.setText(turnA);
 				}
-				else if (n % 4 == 0) {
+				else if (n % 4 == 3) {
 					Ui6.idProfileReady1.setText(turnA);
 					Ui6.idProfileReady2.setText(turnA);
 					Ui6.idProfileReady3.setText(turnA);
@@ -186,13 +190,66 @@ public class ReaderThread extends Thread {
 		} catch (Exception e) {}
 	}
 	
-	private void readPlay(String[] parsReaderMsg) {
-		if (parsReaderMsg[0].equals("START")) {
+	private void readTurn(String[] parsReaderMsg) {
+		if (parsReaderMsg[0].equals("TURN")) {
 			try {
-				Ui6.playTurn.setText("턴 " + "" + " / " + GameServer.vcClient.size());
+				int userTurn = Integer.parseInt(parsReaderMsg[1]);
+				int total = Integer.parseInt(parsReaderMsg[2]);
+				Ui6.colorPallet.setVisible(true);
+				Ui6.playTurn.setText("턴 " + String.valueOf(++userTurn) + " / " + parsReaderMsg[2]);
+				Screen.getScreen().setEnabled(true);
+
+				uiTurn(userTurn, total);
+				new TimerTh().start();
+			} catch(Exception e) {}
+		}
+	}
+	
+	private void readNotTurn(String[] parsReaderMsg) {
+		if (parsReaderMsg[0].equals("NOTTURN")) {
+			try {
+				int userTurn = Integer.parseInt(parsReaderMsg[1]);
+				int total = Integer.parseInt(parsReaderMsg[2]);
+				Ui6.colorPallet.setVisible(false);
+				Ui6.playTurn.setText("턴 " + String.valueOf(++userTurn) + " / " + parsReaderMsg[2]);
+				Screen.getScreen().setEnabled(false);
+
+				uiTurn(userTurn, total);
+				new TimerTh().start();
 			} catch (Exception e) {}
-			
-			new TimerTh().start();
+		}
+	}
+
+	private void readFinish(String[] parsReaderMsg) {
+		if (parsReaderMsg[0].equals("FINISH")) {
+			try {
+				int player = Integer.parseInt(parsReaderMsg[1]);
+				Ui7.data1[player][0] = "1";
+				Ui7.data1[player][1] = parsReaderMsg[2];
+				Ui7.data1[player][2] = parsReaderMsg[3];
+				
+				MainFrame.getMainFrame().setUI(Ui6.getUi6(), Ui7.getUi7());
+			} catch (Exception e) {}			
+		}
+	}
+
+	private void readScore(String[] parsReaderMsg) {
+		if (parsReaderMsg[0].equals("SCORE")) {
+			System.out.println(TAG + "Score");
+			try {
+				Ui6.taChat.setText(Ui6.taChat.getText()+"\n"+parsReaderMsg[1]);
+				Ui6.scrChat.getVerticalScrollBar().setValue(Ui6.scrChat.getVerticalScrollBar().getMaximum());
+			} catch (Exception e) {}
+		}
+	}
+	
+	private void readServer(String[] parsReaderMsg) {
+		if (parsReaderMsg[0].equals("SERVER")) {
+			System.out.println(TAG + "server");
+			try {
+				Ui6.taChat.setText(Ui6.taChat.getText()+"\n"+parsReaderMsg[1]);
+				Ui6.scrChat.getVerticalScrollBar().setValue(Ui6.scrChat.getVerticalScrollBar().getMaximum());
+			} catch (Exception e) {}
 		}
 	}
 	

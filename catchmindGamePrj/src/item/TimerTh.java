@@ -15,7 +15,8 @@ public class TimerTh extends Thread {
 					Thread.sleep(1000);
 				}
 				planStart = true;
-				Ui6.taChat.setText(Ui6.taChat.getText()+"\n"+"item 완료");
+				MainFrame.clnt.sendFinTurn();
+				Ui6.taChat.setText(Ui6.taChat.getText()+"\n"+"완료");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}			
