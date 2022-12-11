@@ -13,6 +13,7 @@ public class Ui1 extends JPanel{
 	private JButton plBtn1; //button
 	private JButton plBtn2; //button
 	private JLabel plImg1; //img
+	private JLabel plImg2; //img
 	
 	public Ui1() {
 		sound = new GameSound("bgm/캐치마인드-로비.wav");
@@ -31,15 +32,19 @@ public class Ui1 extends JPanel{
 		plId1.setFont(new Font("맑은고딕", Font.BOLD, 50));
 				
 		plImg1 = new JLabel();
-		plImg1.setIcon(uiTool.getImg("img/catchMindBanner.png", 1100, 710));
+		plImg1.setIcon(uiTool.getImg("img/catchMindMainTheme.png", 1100, 710));
 		plImg1.setBounds(-20, 0, 1100, 710);
 		//뒷배경 넣을 예정 ex)스케치북
+		
+		//plImg2 = new JLabel();
+		//plImg2.setIcon(uiTool.getImg("img/catchMindLogo.png", 1100, 710));
+		//plImg2.setBounds(-20, 0, 1200, 810);
 		
 		plBtn1 = new JButton("GAME START");
 		plBtn1.setBackground(Color.CYAN);
 		plBtn1.setBounds(130, 510, 800, 80);
 		plBtn1.setFont(new Font("맑은고딕", Font.BOLD, 80));
-		plBtn1.setForeground(Color.ORANGE);
+		plBtn1.setForeground(Color.BLUE);
 		plBtn1.setBorderPainted(false);//Border 태두리제거
 		plBtn1.setContentAreaFilled(false);//영역채우기제거
 		plBtn1.setFocusPainted(false);//마우스 올릴때 테두리제거
@@ -49,7 +54,7 @@ public class Ui1 extends JPanel{
 		plBtn2.setBackground(Color.ORANGE);
 		plBtn2.setBounds(130, 610, 800, 80);
 		plBtn2.setFont(new Font("맑은고딕", Font.BOLD, 80));
-		plBtn2.setForeground(Color.ORANGE);
+		plBtn2.setForeground(Color.BLUE);
 		plBtn2.setBorderPainted(false);//Border 태두리제거
 		plBtn2.setContentAreaFilled(false);//영역채우기제거
 		plBtn2.setFocusPainted(false);//마우스 올릴때 테두리제거
@@ -59,6 +64,7 @@ public class Ui1 extends JPanel{
 		//add(plId1);
 		add(plBtn1);
 		add(plBtn2);
+	    //add(plImg2);
 		add(plImg1);
 				
 	}
