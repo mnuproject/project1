@@ -50,7 +50,7 @@ public class Ui2 extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				MainFrame.clnt.sendId(tfIdInput.getText());
-				uiTool.setUI(Ui2.this, Ui6.getUi6());
+				uiTool.setUI(Ui2.this, Ui3.getUi3());
 				//uiTool.setUI(Ui2.this, new Ui3());
 			}
 		});
