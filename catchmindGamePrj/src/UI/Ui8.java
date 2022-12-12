@@ -71,30 +71,4 @@ public class Ui8 extends JPanel {
 		add(MainPanel);
 		add(plImg1);
 	}
-	
-	class ColorTable extends JTable {
-		public ColorTable(DefaultTableModel dtm) {
-			// TODO Auto-generated constructor stub
-			super(dtm);
-		}
-
-		@Override
-		public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
-			// TODO Auto-generated method stub
-			JComponent component = (JComponent) super.prepareRenderer(renderer, row, column);
-			if (row==0) {
-				component.setBackground(new Color(255, 215, 0));
-			}
-			else if (row==1) {
-				component.setBackground(new Color(192, 192, 192));
-			}
-			else if (row==2) {
-				component.setBackground(new Color(196, 156, 49));
-			}
-			else if (row==3) {
-				component.setBackground(new Color(255, 255, 255));
-			}
-			return component;
-		}
-	}
 }
