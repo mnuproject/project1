@@ -21,7 +21,7 @@ public class Ui2 extends JPanel{
 	private TextField tfIdInput;
 	
 	private Ui2() {
-		sound = new GameSound("bgm/캐치마인드-로비.wav");
+		sound = new GameSound(null);
 		
 		uiTool = new UiTool();
 		setLayout(null);

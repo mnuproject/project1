@@ -4,6 +4,6 @@ import UI.*;
 
 public class GameStart {
 	public static void main(String[] args) {
-		MainFrame.getMainFrame().setUI(Ui1.getUi1());
+		MainFrame.getMainFrame().setUI(Ui0.getUi0());
 	}
 }

@@ -3,10 +3,16 @@ package client;
 import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+
+import javax.swing.JOptionPane;
+
 import server.GameServer;
 
 public class Client {
 	private String TAG = "Client : ";
+	public static String ip = "localhost";
+	public static int PortNum = 3000;
+	
 	public static String clientID = "user";
 	public static boolean isReady = false;
 	
@@ -17,10 +23,11 @@ public class Client {
 	
 	public void connectServer() {
 		try {
-			socket = new Socket(GameServer.ip, GameServer.PortNum);
+			socket = new Socket(ip, PortNum);
 			ReaderThread rt = new ReaderThread();
 			rt.start();				
 		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "서버접속 실패");
 			System.out.println(TAG + "Server connect fail..");
 		}
 	}

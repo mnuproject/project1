@@ -9,7 +9,6 @@ public class MainFrame extends JFrame{
 	
 	private MainFrame() {
 		clnt = new Client();
-		clnt.connectServer();
 		
 		setTitle("캐치마인드");
 		setResizable(false);

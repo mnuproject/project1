@@ -7,31 +7,35 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
+import client.Client;
 import gameSound.GameSound;
 
-public class Ui8 extends JPanel {
-	public static Ui8 ui8;
+public class Ui0 extends JPanel {
+	public static Ui0 ui0;
+	
 	private GameSound sound;
 	private UiTool uiTool;
 	private JButton plBtn1;
-	private JButton plBtn2;
 	private JLabel plImg1;
+	private TextField IpInput;
+	private TextField ServerInput;
 	
-	public Ui8() {
-		//sound = new GameSound("bgm/bg1.wav");
+	private Ui0() {
+		sound = new GameSound(null);
 		uiTool = new UiTool();
 		setLayout(null);
-		uI8_DesignLayout();
+		uI0_DesignLayout();
+		uI0_listener();
 	}	
 	
-	public static Ui8 getUi8() {
-		if (ui8 == null) {
-			ui8 = new Ui8();
+	public static Ui0 getUi0() {
+		if (ui0 == null) {
+			ui0 = new Ui0();
 		}
-		return ui8;
+		return ui0;
 	}
 	
-	private void uI8_DesignLayout() {
+	private void uI0_DesignLayout() {
 		plImg1 = new JLabel();
 		plImg1.setIcon(uiTool.getImg("img/cloud_img.jpg", 1100, 750));
 		plImg1.setBounds(0,0,1100,750);
@@ -45,11 +49,11 @@ public class Ui8 extends JPanel {
 		playTitle.setBounds(225, 25, 200, 50);
 		MainPanel.add(playTitle);
 		
-		TextField IdInput = new TextField();
-		IdInput.setBounds(200, 110, 300, 40);
-		MainPanel.add(IdInput);
+		IpInput = new TextField("localhost");
+		IpInput.setBounds(200, 110, 300, 40);
+		MainPanel.add(IpInput);
 		
-		TextField ServerInput = new TextField();
+		ServerInput = new TextField("3000");
 		ServerInput.setBounds(200, 200, 300, 40);
 		MainPanel.add(ServerInput);
 		
@@ -58,7 +62,7 @@ public class Ui8 extends JPanel {
 		subTitle1.setBounds(100, 100, 200, 50);
 		MainPanel.add(subTitle1);
 		
-		JLabel subTitle2 = new JLabel("서버");
+		JLabel subTitle2 = new JLabel("Port");
 		subTitle2.setFont(uiTool.ftMedium());
 		subTitle2.setBounds(85, 195, 200, 50);
 		MainPanel.add(subTitle2);
@@ -70,5 +74,28 @@ public class Ui8 extends JPanel {
 		add(plBtn1);
 		add(MainPanel);
 		add(plImg1);
+	}
+	
+	private void uI0_listener() {
+		plBtn1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					sound.playEffect("bgm/effect_gamestart.wav");
+					
+					Client.ip = IpInput.getText();
+					Client.PortNum = Integer.parseInt(ServerInput.getText());
+
+					new Thread() {
+			            public void run() {
+							MainFrame.clnt.connectServer();
+			            }
+			        }.start();
+					uiTool.setUI(Ui0.this, Ui1.getUi1());
+					
+				} catch (Exception e1) {
+				}
+			}
+		});
 	}
 }
