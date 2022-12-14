@@ -223,12 +223,19 @@ public class ReaderThread extends Thread {
 		if (parsReaderMsg[0].equals("FINISH")) {
 			try {
 				int player = Integer.parseInt(parsReaderMsg[1]);
-				Ui7.data1[player][0] = "1";
-				Ui7.data1[player][1] = parsReaderMsg[2];
-				Ui7.data1[player][2] = parsReaderMsg[3];
+				int total = Integer.parseInt(parsReaderMsg[2]);
+				int pGrade = player;
 				
-				MainFrame.getMainFrame().setUI(Ui6.getUi6(), Ui7.getUi7());
-			} catch (Exception e) {}			
+				Ui7.data[player][0] = String.valueOf(++pGrade);
+				Ui7.data[player][1] = parsReaderMsg[3];
+				Ui7.data[player][2] = parsReaderMsg[4];				
+				
+				if (total-1 == player) {
+					MainFrame.getMainFrame().setUI(Ui6.getUi6(), Ui7.getUi7());
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

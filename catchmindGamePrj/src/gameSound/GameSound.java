@@ -1,6 +1,5 @@
 package gameSound;
 
-import java.io.File;
 import javax.sound.sampled.*;
 
 public class GameSound {
@@ -16,7 +15,7 @@ public class GameSound {
 	private void playBg(String bgPath) {
 		try {
 			bgClip = AudioSystem.getClip();
-			bgClip.open(AudioSystem.getAudioInputStream(new File(bgPath)));
+			bgClip.open(AudioSystem.getAudioInputStream(getClass().getResource(String.format("/" + bgPath))));
 			bgClip.start();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -34,7 +33,7 @@ public class GameSound {
 	public void playEffect(String path) {
         try {
 			clip = AudioSystem.getClip();
-			clip.open(AudioSystem.getAudioInputStream(new File(path)));
+			clip.open(AudioSystem.getAudioInputStream(getClass().getResource(String.format("/" + path))));
 			clip.start();
 		} catch (Exception e) {
 			e.printStackTrace();

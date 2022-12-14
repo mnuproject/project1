@@ -33,10 +33,9 @@ public class Ui4 extends JPanel{
 		return ui4;
 	}
 	
-	private void uI1_DesignLayout() {
-		
+	private void uI1_DesignLayout() {	
 		plImg1 = new JLabel();
-		plImg1.setIcon(uiTool.getImg("img/item1.jpg", 235, 247));
+		plImg1.setIcon(uiTool.getImg("img/draw.png", 235, 247));
 		plImg1.setBounds(805,20,235,247);
 		
 		plBtn1 = new JButton("1번 주제");
@@ -76,6 +75,11 @@ public class Ui4 extends JPanel{
 		add(plBtn6);
 		add(tf1);
 		add(ta1);
+		
+		JLabel plImg = new JLabel();
+		plImg.setIcon(uiTool.getImg("img/catchMindBG.png", 1100, 750));
+		plImg.setBounds(0, 0, 1100, 750);
+		add(plImg);
 	}
 	
 	private void uI1_listener() {
@@ -111,6 +115,13 @@ public class Ui4 extends JPanel{
 		});
 		
 		plBtn5.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				uiTool.setUI(Ui4.this, Ui5.getUi5());
+			}
+		});
+		
+		plBtn6.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				uiTool.setUI(Ui4.this, Ui5.getUi5());

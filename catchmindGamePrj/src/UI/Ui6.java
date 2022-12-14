@@ -7,8 +7,6 @@ import javax.swing.border.LineBorder;
 
 import client.*;
 import item.*;
-import server.ClientInfo;
-import server.GameServer;
 import gameSound.GameSound;
 
 public class Ui6 extends JPanel{
@@ -91,7 +89,7 @@ public class Ui6 extends JPanel{
 	
 	private Ui6() {
 		uiTool = new UiTool();
-		soundEffect = new GameSound(null);
+		soundEffect = new GameSound("bgm/bg1.wav");
 		
 		setLayout(null);
 		setBackground(new Color(239, 228, 176));

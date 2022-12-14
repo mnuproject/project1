@@ -12,7 +12,7 @@ public class UiTool {
 	
 	public ImageIcon getImg(String filepath, int width, int height) {
 		try {
-			ImageIcon icon = new ImageIcon(ImageIO.read(new File(filepath)));
+			ImageIcon icon = new ImageIcon(ImageIO.read(getClass().getResource(String.format("/" + filepath))));
 			Image img = icon.getImage().getScaledInstance(width, height,  java.awt.Image.SCALE_SMOOTH);
 			return new ImageIcon(img);
 		} catch (IOException e) {

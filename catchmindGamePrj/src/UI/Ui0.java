@@ -16,6 +16,7 @@ public class Ui0 extends JPanel {
 	private GameSound sound;
 	private UiTool uiTool;
 	private JButton plBtn1;
+	private JButton plBtnInfo;
 	private JLabel plImg1;
 	private TextField IpInput;
 	private TextField ServerInput;
@@ -39,6 +40,11 @@ public class Ui0 extends JPanel {
 		plImg1 = new JLabel();
 		plImg1.setIcon(uiTool.getImg("img/cloud_img.jpg", 1100, 750));
 		plImg1.setBounds(0,0,1100,750);
+		
+		plBtnInfo = new JButton("정보");
+		plBtnInfo.setBounds(0, 0, 100, 40);
+		plBtnInfo.setBackground(new Color(255, 255, 255));
+		add(plBtnInfo);
 		
 		JPanel MainPanel = new JPanel();
 		MainPanel.setLayout(null);
@@ -95,6 +101,13 @@ public class Ui0 extends JPanel {
 					
 				} catch (Exception e1) {
 				}
+			}
+		});
+		
+		plBtnInfo.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new UiREF();
 			}
 		});
 	}

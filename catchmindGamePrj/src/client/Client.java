@@ -3,10 +3,8 @@ package client;
 import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-
 import javax.swing.JOptionPane;
 
-import server.GameServer;
 
 public class Client {
 	private String TAG = "Client : ";

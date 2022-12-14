@@ -66,6 +66,7 @@ public class ClientInfo extends Thread {
 	
 	private void protocolID(String[] parsReaderMsg) {
 		if (parsReaderMsg[0].equals("ID")) {
+			Ui9.Input.setText(Ui9.Input.getText() + "[server] "+parsReaderMsg[1]+" 입장\n");
 			this.clientID = parsReaderMsg[1];
 			for (int i = 0; i < GameServer.vcClient.size(); i++) {
 				GameServer.vcClient.get(i).writer.println("CHAT&[" + clientID + "] is enter the room.");
@@ -91,10 +92,15 @@ public class ClientInfo extends Thread {
 	}
 	
 	private void protocolReady(String[] parsReaderMsg) {
+		boolean serverLog = true;
 		if (parsReaderMsg[0].equals("READY")) {
 			if (parsReaderMsg[2].equals("true")) {				
 				for (int i = 0; i < GameServer.vcClient.size(); i++) {
 					if (GameServer.vcClient.get(i).clientID.equals(parsReaderMsg[1])) {
+						if (serverLog) {
+							Ui9.Input.setText(Ui9.Input.getText() + "[server] "+parsReaderMsg[1]+" 준비\n");
+							serverLog = false;
+						}
 						GameServer.vcClient.get(i).isReady = true;
 						isStart();
 					}
@@ -103,6 +109,10 @@ public class ClientInfo extends Thread {
 			else if (parsReaderMsg[2].equals("false")) {
 				for (int i = 0; i < GameServer.vcClient.size(); i++) {
 					if (GameServer.vcClient.get(i).clientID.equals(parsReaderMsg[1])) {
+						if (serverLog) {
+							Ui9.Input.setText(Ui9.Input.getText() + "[server] "+parsReaderMsg[1]+" 준비중\n");
+							serverLog = false;
+						}
 						GameServer.vcClient.get(i).isReady = false;
 					}
 				}
@@ -117,6 +127,7 @@ public class ClientInfo extends Thread {
 			}
 		}
 		
+		Ui9.Input.setText(Ui9.Input.getText() + "[server] 게임시작 됨\n");
 		for (int i = 0; i < GameServer.vcClient.size(); i++) {
 			GameServer.vcClient.get(i).writer.println("START&"
 				+ String.valueOf(serverTurn)
@@ -161,12 +172,19 @@ public class ClientInfo extends Thread {
 	private void protocolFinish(String[] parsReaderMsg) {
 		//Finish
 		if (parsReaderMsg[0].equals("FINISH")) {
+			Ui9.Input.setText(Ui9.Input.getText() + "[server] 게임종료 됨\n");
 			System.out.println(TAG + "PROTOCOL Finish");
 			for (int i = 0; i < GameServer.vcClient.size(); i++) {
+				try {
+					Ui9.Input.setText(Ui9.Input.getText() + "[server] 아이디" + GameServer.vcClient.get(i).clientID + "\n");
+					Ui9.Input.setText(Ui9.Input.getText() + "[server] 점수" + GameServer.vcClient.get(i).score + "\n");
+				}catch (Exception e) {}
+				
 				for (int j = 0; j < GameServer.vcClient.size(); j++) {
 					GameServer.vcClient.get(i).writer.println(
-							"FINISH" 
+							"FINISH"
 							+ "&" + String.valueOf(j) 
+							+ "&" + String.valueOf(GameServer.vcClient.size()) 
 							+ "&" + GameServer.vcClient.get(j).clientID
 							+ "&" + String.valueOf(GameServer.vcClient.get(j).score));
 				}
@@ -181,6 +199,7 @@ public class ClientInfo extends Thread {
 					GameServer.vcClient.get(i).writer.println(
 							"FINISH" 
 							+ "&" + String.valueOf(j) 
+							+ "&" + String.valueOf(GameServer.vcClient.size()) 
 							+ "&" + GameServer.vcClient.get(j).clientID
 							+ "&" + String.valueOf(GameServer.vcClient.get(j).score));
 				}
@@ -190,6 +209,7 @@ public class ClientInfo extends Thread {
 	
 	private void protocolExit(String[] parsReaderMsg) {
 		if (parsReaderMsg[0].equals("EXIT")) {
+			Ui9.Input.setText(Ui9.Input.getText() + "[server] " + parsReaderMsg[1] + " 게임에서 나감\n");
 			System.out.println(TAG + "PROTOCOL Exit");
 			for(int i = 0; i < GameServer.vcClient.size(); i++) {
 				if (GameServer.vcClient.get(i).clientID.equals(parsReaderMsg[1])) {

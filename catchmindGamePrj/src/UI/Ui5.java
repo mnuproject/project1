@@ -11,10 +11,10 @@ import gameSound.GameSound;
 public class Ui5 extends JPanel{
 	public static Ui5 ui5;
 
-	ImageIcon img1 = new ImageIcon("img/animal_img.png");
-	ImageIcon img2 = new ImageIcon("img/food_img.png");
-	ImageIcon img3 = new ImageIcon("img/fruit_img.png");
-	ImageIcon img4 = new ImageIcon("img/gamename_img.png");
+	private ImageIcon img1;
+	private ImageIcon img2;
+	private ImageIcon img3;
+	private ImageIcon img4;
 	
 	private UiTool uiTool;
 	private GameSound soundEffect;
@@ -53,6 +53,11 @@ public class Ui5 extends JPanel{
 		plId1.setBackground(new Color(0, 0, 255));
 		plId1.setBounds(200, 30, 800, 50);
 		plId1.setFont(uiTool.ftLarge());
+		
+		img1 = uiTool.getImg("img/animal_img.png", 900, 900);
+		img2 = uiTool.getImg("img/food_img.png", 600, 500);
+		img3 = uiTool.getImg("img/fruit_img.png", 800, 640);
+		img4 = uiTool.getImg("img/gamename_img.png", 800, 530);
 		
 		plId2 = new JLabel("동물");
 		plId2.setBounds(190, 50, 300, 200);

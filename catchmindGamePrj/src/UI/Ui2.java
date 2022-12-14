@@ -5,8 +5,6 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import gameSound.GameSound;
-import server.ClientInfo;
-import server.GameServer;
 
 public class Ui2 extends JPanel{
 	public static Ui2 ui2;
@@ -21,7 +19,7 @@ public class Ui2 extends JPanel{
 	private TextField tfIdInput;
 	
 	private Ui2() {
-		sound = new GameSound(null);
+		sound = new GameSound("bgm/Farewell.wav");
 		
 		uiTool = new UiTool();
 		setLayout(null);
@@ -83,6 +81,30 @@ public class Ui2 extends JPanel{
 				MainFrame.clnt.sendId(tfIdInput.getText());
 				uiTool.setUI(Ui2.this, Ui3.getUi3());
 				//uiTool.setUI(Ui2.this, new Ui3());
+			}
+		});
+		
+		tfIdInput.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == 10 && tfIdInput.getText().length() > 0) {
+					sound.playEffect("bgm/effect_gamestart.wav");
+					sound.stopBg();
+					MainFrame.clnt.sendId(tfIdInput.getText());
+					uiTool.setUI(Ui2.this, Ui3.getUi3());
+				}
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
 			}
 		});
 	}

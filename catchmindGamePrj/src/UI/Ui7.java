@@ -18,22 +18,12 @@ public class Ui7 extends JPanel{
 	private JLabel plImg1;
 	
 	private String[] columnType = {"순위", "이름", "점수"};
-	private Object[][] data = {
-		       {"1", "A", "**"},
-		       {"2", "B", "**"},
-		       {"3", "C", "**"},
-		       {"4", "D", "**"}
+	public static Object[][] data = {
+		       {"", "", ""},
+		       {"", "", ""},
+		       {"", "", ""},
+		       {"", "", ""}
 	};
-	
-	public static Object[][] data1 = {
-			{"", "", ""},
-			{"", "", ""},
-			{"", "", ""},
-			{"", "", ""}
-};
-	public static String readidlist = "aa&bb&cc&null";
-	public static String readscorelist = "";
-	private String idlist[];
 	
 	public Ui7() {
 		//sound = new GameSound("bgm/bg1.wav");

@@ -22,21 +22,17 @@ public class GameServer {
 			
 			while (true) {
 				Ui9.playTitle.setText("접속 대기중..");
-				Ui9.Input.setText(Ui9.Input.getText() + "접속 대기중...\n");
+				Ui9.Input.setText(Ui9.Input.getText() + "[server] 접속 대기중...\n");
 				System.out.println("client Accept wait.....");
 				
 				socket = serverSocket.accept(); // 서버의 접속을 대기중.
 				System.out.println("Accept");
-				Ui9.Input.setText(Ui9.Input.getText() + "클라이언트 접속\n");
+				Ui9.Input.setText(Ui9.Input.getText() + "[server] 클라이언트 접속\n");
 				
 				// 추가 스레드에 클라이언트 소켓을 타켓으로 설정.
 				ClientInfo ci = new ClientInfo(socket);
 				ci.start();
 				vcClient.add(ci); // 백터에 추가.
-				
-				for (int i=0; i<vcClient.size(); i++) {
-					Ui9.Input.setText(Ui9.Input.getText() + vcClient.get(i).clientID + " 입장\n");
-				}
 			}
 
 		} catch (Exception e) {
