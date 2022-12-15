@@ -106,7 +106,7 @@ public class Ui9 extends JPanel {
 		add(MainPanel);
 		add(plImg1);
 	}
-	private void uI92_listener() {
+	private void uI9_listener() {
 		plBtn1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
