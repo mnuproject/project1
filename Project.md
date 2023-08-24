@@ -1,5 +1,6 @@
-<div align=center>
-	![header](https://capsule-render.vercel.app/api?type=waving&height=150&text=CatchMind&animation=scaleIn&FontSize=16)
+<div align="center">
+	
+ ![header](https://capsule-render.vercel.app/api?type=waving&height=150&text=CatchMind&animation=scaleIn&FontSize=16)
 </div>
 <div align=center>
 	<h3>📚 Tech Stack 📚</h3>
