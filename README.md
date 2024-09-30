@@ -8,6 +8,3 @@
 <div align=center>
 	<p>🏆 프로그래밍기초프로젝트 🏆</p>
 </div>
-<div align=center>
-	<p>🎨 SNS & Portfolio 🎨</p>
-</div>
